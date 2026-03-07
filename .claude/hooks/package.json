@@ -1,0 +1,13 @@
+{
+  "name": "claude-hooks",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0",
+    "@types/node": "^20.0.0"
+  },
+  "scripts": {
+    "build": "tsc skill-activation-prompt.ts --module commonjs --target es2020 --esModuleInterop true --outDir ."
+  }
+}

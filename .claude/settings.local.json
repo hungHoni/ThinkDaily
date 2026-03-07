@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /Users/huynhhung/Odin/Claude/ThinkDaily/.claude/hooks/*.sh)",
+      "Bash(npm install)",
+      "Bash(npx tsc skill-activation-prompt.ts --module commonjs --target es2020 --esModuleInterop true --skipLibCheck)",
+      "Bash(gh api repos/diet103/claude-code-infrastructure-showcase/contents/.claude/skills)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(textutil -convert txt \"/Users/huynhhung/Odin/Claude/ThinkDaily/ThinkDaily-Plan-Updated.docx\" -output /tmp/thinkdaily-plan.txt)",
+      "Read(//tmp/**)",
+      "Bash(flutter create think_daily --org com.thinkdaily --platforms ios,android)",
+      "Read(//Users/huynhhung/fvm/default/bin/**)",
+      "Read(//opt/homebrew/bin/**)",
+      "Read(//Users/huynhhung/**)",
+      "Bash(export PATH=\"$PATH:/Users/huynhhung/Odin/Flutter/1/flutter_sdk/bin\")",
+      "Bash(flutter --version)",
+      "Bash(mv /Users/huynhhung/Odin/Claude/ThinkDaily/think_daily/* /Users/huynhhung/Odin/Claude/ThinkDaily/)",
+      "Bash(mv /Users/huynhhung/Odin/Claude/ThinkDaily/think_daily/.* /Users/huynhhung/Odin/Claude/ThinkDaily/)",
+      "Bash(/Users/huynhhung/Odin/Flutter/1/flutter_sdk/bin/flutter pub get)",
+      "Bash(gem install securerandom -v 0.3.2 --user-install)",
+      "Bash(gem install cocoapods -v 1.14.3 --user-install)"
+    ]
+  }
+}
