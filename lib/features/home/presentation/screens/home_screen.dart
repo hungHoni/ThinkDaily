@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:think_daily/app/router.dart';
 import 'package:think_daily/core/theme/app_colors.dart';
-import 'package:think_daily/core/theme/app_spacing.dart';
 import 'package:think_daily/core/theme/app_text_styles.dart';
 import 'package:think_daily/features/history/data/sources/streak_service.dart';
 import 'package:think_daily/features/history/data/sources/xp_service.dart';
@@ -49,90 +49,136 @@ class HomeScreen extends ConsumerWidget {
     final track = tracks.firstWhere((t) => t.id == _trackId);
 
     final completedToday = progressSvc.hasCompletedToday(_trackId);
-    final currentUnit = units.isNotEmpty && progress.currentUnitIndex < units.length
-        ? units[progress.currentUnitIndex]
-        : null;
+    final currentUnit =
+        units.isNotEmpty && progress.currentUnitIndex < units.length
+            ? units[progress.currentUnitIndex]
+            : null;
     final completedUnits = progress.currentUnitIndex;
 
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Padding(
-          padding: AppSpacing.pagePadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: AppSpacing.xl),
-              Row(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 480),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(28, 24, 28, 28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Text('ThinkDaily', style: AppTextStyles.appTitle),
+                  // ── Header ──────────────────────────────────────
+                  Row(
+                    children: [
+                      Text('ThinkDaily', style: AppTextStyles.appTitle),
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () => context.push(AppRoutes.stats),
+                        icon: const Icon(
+                          Icons.bar_chart_rounded,
+                          color: AppColors.textSecondary,
+                          size: 20,
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
+                    ],
                   ),
-                  IconButton(
-                    onPressed: () => context.push(AppRoutes.stats),
-                    icon: const Icon(
-                      Icons.bar_chart_rounded,
-                      color: AppColors.textSecondary,
+
+                  const SizedBox(height: 36),
+
+                  // ── Track label ──────────────────────────────────
+                  Text(
+                    track.title.toUpperCase(),
+                    style: AppTextStyles.categoryLabel,
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // ── Unit title ───────────────────────────────────
+                  if (currentUnit != null)
+                    Text(
+                      currentUnit.title,
+                      style: GoogleFonts.lora(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.text,
+                        height: 1.25,
+                        letterSpacing: 0.1,
+                      ),
                     ),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(),
+
+                  const SizedBox(height: 28),
+
+                  // ── Progress ─────────────────────────────────────
+                  Row(
+                    children: [
+                      for (var i = 0; i < track.totalUnits; i++) ...[
+                        if (i > 0) const SizedBox(width: 5),
+                        Expanded(
+                          child: Container(
+                            height: 2,
+                            color: i < completedUnits
+                                ? AppColors.text
+                                : i == completedUnits
+                                    ? AppColors.textSecondary
+                                    : AppColors.border,
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
+
+                  const SizedBox(height: 8),
+
+                  Text(
+                    'Unit ${completedUnits + 1} of ${track.totalUnits}',
+                    style: AppTextStyles.categoryLabel,
+                  ),
+
+                  const Spacer(),
+
+                  // ── Stats ────────────────────────────────────────
+                  Row(
+                    children: [
+                      Text(
+                        '${streakSvc.count}',
+                        style: AppTextStyles.thinkingPattern,
+                      ),
+                      const SizedBox(width: 4),
+                      Text('day streak', style: AppTextStyles.categoryLabel),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text('·', style: AppTextStyles.categoryLabel),
+                      ),
+                      Text(
+                        '${xpSvc.total}',
+                        style: AppTextStyles.thinkingPattern,
+                      ),
+                      const SizedBox(width: 4),
+                      Text('xp', style: AppTextStyles.categoryLabel),
+                    ],
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // ── CTA ──────────────────────────────────────────
+                  if (completedToday)
+                    const _CompletedState()
+                  else
+                    SizedBox(
+                      width: double.infinity,
+                      height: 56,
+                      child: ElevatedButton(
+                        onPressed: () => context.push(AppRoutes.problem),
+                        child: Text(
+                          "Begin today's question",
+                          style: AppTextStyles.buttonLabel,
+                        ),
+                      ),
+                    ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.xxl),
-
-              // Track + unit info
-              Text(
-                track.title.toUpperCase(),
-                style: AppTextStyles.categoryLabel,
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              if (currentUnit != null)
-                Text(currentUnit.title, style: AppTextStyles.thinkingPattern),
-              const SizedBox(height: AppSpacing.xs),
-              Text(
-                'Unit ${completedUnits + 1} of ${track.totalUnits}',
-                style: AppTextStyles.categoryLabel,
-              ),
-
-              const SizedBox(height: AppSpacing.xxl),
-              const Divider(height: 1, color: AppColors.border),
-              const SizedBox(height: AppSpacing.xxl),
-
-              // Streak + XP
-              _StatRow(label: 'DAY STREAK', value: '${streakSvc.count}'),
-              const SizedBox(height: AppSpacing.lg),
-              _StatRow(label: 'XP TOTAL', value: '${xpSvc.total}'),
-
-              const Spacer(),
-
-              // CTA
-              if (completedToday) ...[
-                Text(
-                  'Come back tomorrow.',
-                  style: AppTextStyles.doneMessage,
-                ),
-                const SizedBox(height: AppSpacing.sm),
-                Text(
-                  'One question a day builds the habit.',
-                  style: AppTextStyles.categoryLabel,
-                ),
-              ] else ...[
-                SizedBox(
-                  width: double.infinity,
-                  height: 52,
-                  child: ElevatedButton(
-                    onPressed: () => context.push(AppRoutes.problem),
-                    child: Text(
-                      "Today's Question",
-                      style: AppTextStyles.buttonLabel,
-                    ),
-                  ),
-                ),
-              ],
-
-              const SizedBox(height: AppSpacing.lg),
-            ],
+            ),
           ),
         ),
       ),
@@ -140,21 +186,20 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-class _StatRow extends StatelessWidget {
-  const _StatRow({required this.label, required this.value});
-
-  final String label;
-  final String value;
+class _CompletedState extends StatelessWidget {
+  const _CompletedState();
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.baseline,
-      textBaseline: TextBaseline.alphabetic,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(value, style: AppTextStyles.appTitle),
-        const SizedBox(width: AppSpacing.sm),
-        Text(label, style: AppTextStyles.categoryLabel),
+        Text('Done for today.', style: AppTextStyles.doneMessage),
+        const SizedBox(height: 4),
+        Text(
+          'One question a day builds the habit.',
+          style: AppTextStyles.categoryLabel,
+        ),
       ],
     );
   }
