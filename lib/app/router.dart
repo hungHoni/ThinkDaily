@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:think_daily/features/history/presentation/screens/stats_screen.dart';
+import 'package:think_daily/features/home/presentation/screens/home_screen.dart';
 import 'package:think_daily/features/problem/data/models/problem.dart';
 import 'package:think_daily/features/problem/presentation/providers/problem_provider.dart';
 import 'package:think_daily/features/problem/presentation/screens/done_screen.dart';
@@ -10,9 +12,11 @@ import 'package:think_daily/features/problem/presentation/screens/splash_screen.
 
 abstract class AppRoutes {
   static const splash = '/';
+  static const home = '/home';
   static const problem = '/problem';
   static const feedback = '/feedback';
   static const done = '/done';
+  static const stats = '/stats';
 }
 
 class FeedbackArgs {
@@ -29,6 +33,10 @@ final router = GoRouter(
       pageBuilder: (_, state) => _fadePage(state, const SplashScreen()),
     ),
     GoRoute(
+      path: AppRoutes.home,
+      pageBuilder: (_, state) => _fadePage(state, const HomeScreen()),
+    ),
+    GoRoute(
       path: AppRoutes.problem,
       pageBuilder: (_, state) => _fadePage(state, const ProblemScreen()),
     ),
@@ -43,6 +51,10 @@ final router = GoRouter(
     GoRoute(
       path: AppRoutes.done,
       pageBuilder: (_, state) => _fadePage(state, const DoneScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.stats,
+      pageBuilder: (_, state) => _fadePage(state, const StatsScreen()),
     ),
   ],
 );

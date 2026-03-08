@@ -48,7 +48,7 @@ class ProgressService {
     final entry = {
       'date': _today,
       'problemId': problemId,
-      'userAnswer': userAnswer is List ? userAnswer : userAnswer,
+      'userAnswer': userAnswer,
       'correct': correct,
     };
     history.add(entry);

@@ -14,22 +14,34 @@ import 'package:think_daily/features/problem/presentation/widgets/choice_options
 import 'package:think_daily/features/problem/presentation/widgets/ordering_widget.dart';
 import 'package:think_daily/features/problem/presentation/widgets/submit_button.dart';
 
+// Default track for Phase 2a — will be dynamic in Phase 2b (HomeScreen)
+const _defaultTrackId = 'problem-decomposition';
+
 class ProblemScreen extends ConsumerWidget {
   const ProblemScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final problem = ref.watch(todayProblemProvider);
+    final asyncProblem = ref.watch(nextQuestionProvider(_defaultTrackId));
 
-    if (problem == null) {
-      return _NoProblemsToday();
-    }
-
-    return _ProblemView(problem: problem);
+    return asyncProblem.when(
+      loading: () => const Scaffold(
+        backgroundColor: AppColors.background,
+        body: SizedBox.shrink(),
+      ),
+      error: (_, __) => const Scaffold(
+        backgroundColor: AppColors.background,
+        body: SizedBox.shrink(),
+      ),
+      data: (problem) {
+        if (problem == null) return _NoProblemsLeft();
+        return _ProblemView(problem: problem);
+      },
+    );
   }
 }
 
-class _NoProblemsToday extends StatelessWidget {
+class _NoProblemsLeft extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +51,7 @@ class _NoProblemsToday extends StatelessWidget {
           padding: AppSpacing.pagePadding,
           child: Center(
             child: Text(
-              'No problem today.\nCheck back tomorrow.',
+              'Track complete.\nCheck back tomorrow.',
               style: AppTextStyles.doneMessage,
               textAlign: TextAlign.center,
             ),
@@ -73,11 +85,8 @@ class _ProblemView extends ConsumerWidget {
                 AppSpacing.sm,
               ),
               child: MediaQuery.of(context).disableAnimations
-                  ? Text(
-                      problem.category.label,
-                      style: AppTextStyles.categoryLabel,
-                    )
-                  : Text(problem.category.label, style: AppTextStyles.categoryLabel)
+                  ? Text(problem.unitTitle, style: AppTextStyles.categoryLabel)
+                  : Text(problem.unitTitle, style: AppTextStyles.categoryLabel)
                       .animate()
                       .fadeIn(duration: const Duration(milliseconds: 400))
                       .moveY(

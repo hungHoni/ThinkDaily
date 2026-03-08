@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:think_daily/app/router.dart';
 import 'package:think_daily/core/theme/app_colors.dart';
 import 'package:think_daily/core/theme/app_text_styles.dart';
-import 'package:think_daily/features/history/data/sources/progress_service.dart';
 import 'package:think_daily/features/notifications/notification_service.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -30,13 +29,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     await notifications.requestPermissionIfNeeded();
 
     if (!mounted) return;
-    final progress = await ref.read(progressServiceProvider.future);
-    if (!mounted) return;
-    if (progress.hasCompletedToday()) {
-      context.go(AppRoutes.done);
-    } else {
-      context.go(AppRoutes.problem);
-    }
+    context.go(AppRoutes.home);
   }
 
   @override

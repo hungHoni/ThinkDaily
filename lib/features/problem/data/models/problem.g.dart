@@ -9,9 +9,12 @@ part of 'problem.dart';
 _$ProblemImpl _$$ProblemImplFromJson(Map<String, dynamic> json) =>
     _$ProblemImpl(
       id: json['id'] as String,
-      date: json['date'] as String,
+      trackId: json['trackId'] as String,
+      unitIndex: (json['unitIndex'] as num).toInt(),
+      questionIndex: (json['questionIndex'] as num).toInt(),
+      difficulty: $enumDecode(_$DifficultyEnumMap, json['difficulty']),
+      unitTitle: json['unitTitle'] as String,
       type: $enumDecode(_$ProblemTypeEnumMap, json['type']),
-      category: $enumDecode(_$ProblemCategoryEnumMap, json['category']),
       prompt: json['prompt'] as String,
       options: (json['options'] as List<dynamic>)
           .map((e) => e as String)
@@ -24,9 +27,12 @@ _$ProblemImpl _$$ProblemImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ProblemImplToJson(_$ProblemImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'date': instance.date,
+      'trackId': instance.trackId,
+      'unitIndex': instance.unitIndex,
+      'questionIndex': instance.questionIndex,
+      'difficulty': _$DifficultyEnumMap[instance.difficulty]!,
+      'unitTitle': instance.unitTitle,
       'type': _$ProblemTypeEnumMap[instance.type]!,
-      'category': _$ProblemCategoryEnumMap[instance.category]!,
       'prompt': instance.prompt,
       'options': instance.options,
       'correctAnswer': instance.correctAnswer,
@@ -34,17 +40,13 @@ Map<String, dynamic> _$$ProblemImplToJson(_$ProblemImpl instance) =>
       'thinkingPattern': instance.thinkingPattern,
     };
 
+const _$DifficultyEnumMap = {
+  Difficulty.easy: 'easy',
+  Difficulty.medium: 'medium',
+  Difficulty.hard: 'hard',
+};
+
 const _$ProblemTypeEnumMap = {
   ProblemType.choice: 'choice',
   ProblemType.ordering: 'ordering',
-};
-
-const _$ProblemCategoryEnumMap = {
-  ProblemCategory.logic: 'logic',
-  ProblemCategory.pattern: 'pattern',
-  ProblemCategory.algorithm: 'algorithm',
-  ProblemCategory.decomposition: 'decomposition',
-  ProblemCategory.edgeCases: 'edgeCases',
-  ProblemCategory.estimation: 'estimation',
-  ProblemCategory.dataStructure: 'dataStructure',
 };

@@ -22,9 +22,13 @@ Problem _$ProblemFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Problem {
   String get id => throw _privateConstructorUsedError;
-  String get date => throw _privateConstructorUsedError; // YYYY-MM-DD
+  String get trackId => throw _privateConstructorUsedError;
+  int get unitIndex => throw _privateConstructorUsedError;
+  int get questionIndex => throw _privateConstructorUsedError;
+  Difficulty get difficulty => throw _privateConstructorUsedError;
+  String get unitTitle =>
+      throw _privateConstructorUsedError; // display label shown on ProblemScreen
   ProblemType get type => throw _privateConstructorUsedError;
-  ProblemCategory get category => throw _privateConstructorUsedError;
   String get prompt => throw _privateConstructorUsedError;
   List<String> get options => throw _privateConstructorUsedError;
   Object get correctAnswer =>
@@ -48,9 +52,12 @@ abstract class $ProblemCopyWith<$Res> {
   @useResult
   $Res call({
     String id,
-    String date,
+    String trackId,
+    int unitIndex,
+    int questionIndex,
+    Difficulty difficulty,
+    String unitTitle,
     ProblemType type,
-    ProblemCategory category,
     String prompt,
     List<String> options,
     Object correctAnswer,
@@ -75,9 +82,12 @@ class _$ProblemCopyWithImpl<$Res, $Val extends Problem>
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
+    Object? trackId = null,
+    Object? unitIndex = null,
+    Object? questionIndex = null,
+    Object? difficulty = null,
+    Object? unitTitle = null,
     Object? type = null,
-    Object? category = null,
     Object? prompt = null,
     Object? options = null,
     Object? correctAnswer = null,
@@ -90,18 +100,30 @@ class _$ProblemCopyWithImpl<$Res, $Val extends Problem>
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
                       as String,
-            date: null == date
-                ? _value.date
-                : date // ignore: cast_nullable_to_non_nullable
+            trackId: null == trackId
+                ? _value.trackId
+                : trackId // ignore: cast_nullable_to_non_nullable
+                      as String,
+            unitIndex: null == unitIndex
+                ? _value.unitIndex
+                : unitIndex // ignore: cast_nullable_to_non_nullable
+                      as int,
+            questionIndex: null == questionIndex
+                ? _value.questionIndex
+                : questionIndex // ignore: cast_nullable_to_non_nullable
+                      as int,
+            difficulty: null == difficulty
+                ? _value.difficulty
+                : difficulty // ignore: cast_nullable_to_non_nullable
+                      as Difficulty,
+            unitTitle: null == unitTitle
+                ? _value.unitTitle
+                : unitTitle // ignore: cast_nullable_to_non_nullable
                       as String,
             type: null == type
                 ? _value.type
                 : type // ignore: cast_nullable_to_non_nullable
                       as ProblemType,
-            category: null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                      as ProblemCategory,
             prompt: null == prompt
                 ? _value.prompt
                 : prompt // ignore: cast_nullable_to_non_nullable
@@ -137,9 +159,12 @@ abstract class _$$ProblemImplCopyWith<$Res> implements $ProblemCopyWith<$Res> {
   @useResult
   $Res call({
     String id,
-    String date,
+    String trackId,
+    int unitIndex,
+    int questionIndex,
+    Difficulty difficulty,
+    String unitTitle,
     ProblemType type,
-    ProblemCategory category,
     String prompt,
     List<String> options,
     Object correctAnswer,
@@ -163,9 +188,12 @@ class __$$ProblemImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
+    Object? trackId = null,
+    Object? unitIndex = null,
+    Object? questionIndex = null,
+    Object? difficulty = null,
+    Object? unitTitle = null,
     Object? type = null,
-    Object? category = null,
     Object? prompt = null,
     Object? options = null,
     Object? correctAnswer = null,
@@ -178,18 +206,30 @@ class __$$ProblemImplCopyWithImpl<$Res>
             ? _value.id
             : id // ignore: cast_nullable_to_non_nullable
                   as String,
-        date: null == date
-            ? _value.date
-            : date // ignore: cast_nullable_to_non_nullable
+        trackId: null == trackId
+            ? _value.trackId
+            : trackId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        unitIndex: null == unitIndex
+            ? _value.unitIndex
+            : unitIndex // ignore: cast_nullable_to_non_nullable
+                  as int,
+        questionIndex: null == questionIndex
+            ? _value.questionIndex
+            : questionIndex // ignore: cast_nullable_to_non_nullable
+                  as int,
+        difficulty: null == difficulty
+            ? _value.difficulty
+            : difficulty // ignore: cast_nullable_to_non_nullable
+                  as Difficulty,
+        unitTitle: null == unitTitle
+            ? _value.unitTitle
+            : unitTitle // ignore: cast_nullable_to_non_nullable
                   as String,
         type: null == type
             ? _value.type
             : type // ignore: cast_nullable_to_non_nullable
                   as ProblemType,
-        category: null == category
-            ? _value.category
-            : category // ignore: cast_nullable_to_non_nullable
-                  as ProblemCategory,
         prompt: null == prompt
             ? _value.prompt
             : prompt // ignore: cast_nullable_to_non_nullable
@@ -219,9 +259,12 @@ class __$$ProblemImplCopyWithImpl<$Res>
 class _$ProblemImpl implements _Problem {
   const _$ProblemImpl({
     required this.id,
-    required this.date,
+    required this.trackId,
+    required this.unitIndex,
+    required this.questionIndex,
+    required this.difficulty,
+    required this.unitTitle,
     required this.type,
-    required this.category,
     required this.prompt,
     required final List<String> options,
     required this.correctAnswer,
@@ -235,12 +278,18 @@ class _$ProblemImpl implements _Problem {
   @override
   final String id;
   @override
-  final String date;
-  // YYYY-MM-DD
+  final String trackId;
+  @override
+  final int unitIndex;
+  @override
+  final int questionIndex;
+  @override
+  final Difficulty difficulty;
+  @override
+  final String unitTitle;
+  // display label shown on ProblemScreen
   @override
   final ProblemType type;
-  @override
-  final ProblemCategory category;
   @override
   final String prompt;
   final List<String> _options;
@@ -261,7 +310,7 @@ class _$ProblemImpl implements _Problem {
 
   @override
   String toString() {
-    return 'Problem(id: $id, date: $date, type: $type, category: $category, prompt: $prompt, options: $options, correctAnswer: $correctAnswer, explanation: $explanation, thinkingPattern: $thinkingPattern)';
+    return 'Problem(id: $id, trackId: $trackId, unitIndex: $unitIndex, questionIndex: $questionIndex, difficulty: $difficulty, unitTitle: $unitTitle, type: $type, prompt: $prompt, options: $options, correctAnswer: $correctAnswer, explanation: $explanation, thinkingPattern: $thinkingPattern)';
   }
 
   @override
@@ -270,10 +319,16 @@ class _$ProblemImpl implements _Problem {
         (other.runtimeType == runtimeType &&
             other is _$ProblemImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.date, date) || other.date == date) &&
+            (identical(other.trackId, trackId) || other.trackId == trackId) &&
+            (identical(other.unitIndex, unitIndex) ||
+                other.unitIndex == unitIndex) &&
+            (identical(other.questionIndex, questionIndex) ||
+                other.questionIndex == questionIndex) &&
+            (identical(other.difficulty, difficulty) ||
+                other.difficulty == difficulty) &&
+            (identical(other.unitTitle, unitTitle) ||
+                other.unitTitle == unitTitle) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.category, category) ||
-                other.category == category) &&
             (identical(other.prompt, prompt) || other.prompt == prompt) &&
             const DeepCollectionEquality().equals(other._options, _options) &&
             const DeepCollectionEquality().equals(
@@ -291,9 +346,12 @@ class _$ProblemImpl implements _Problem {
   int get hashCode => Object.hash(
     runtimeType,
     id,
-    date,
+    trackId,
+    unitIndex,
+    questionIndex,
+    difficulty,
+    unitTitle,
     type,
-    category,
     prompt,
     const DeepCollectionEquality().hash(_options),
     const DeepCollectionEquality().hash(correctAnswer),
@@ -318,9 +376,12 @@ class _$ProblemImpl implements _Problem {
 abstract class _Problem implements Problem {
   const factory _Problem({
     required final String id,
-    required final String date,
+    required final String trackId,
+    required final int unitIndex,
+    required final int questionIndex,
+    required final Difficulty difficulty,
+    required final String unitTitle,
     required final ProblemType type,
-    required final ProblemCategory category,
     required final String prompt,
     required final List<String> options,
     required final Object correctAnswer,
@@ -333,11 +394,17 @@ abstract class _Problem implements Problem {
   @override
   String get id;
   @override
-  String get date; // YYYY-MM-DD
+  String get trackId;
+  @override
+  int get unitIndex;
+  @override
+  int get questionIndex;
+  @override
+  Difficulty get difficulty;
+  @override
+  String get unitTitle; // display label shown on ProblemScreen
   @override
   ProblemType get type;
-  @override
-  ProblemCategory get category;
   @override
   String get prompt;
   @override
