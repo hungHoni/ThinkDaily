@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:think_daily/app/router.dart';
 import 'package:think_daily/core/theme/app_colors.dart';
 import 'package:think_daily/core/theme/app_spacing.dart';
 import 'package:think_daily/core/theme/app_text_styles.dart';
@@ -158,33 +159,43 @@ class _StatsBody extends StatelessWidget {
               ],
             ],
 
-            // ── History ─────────────────────────────────────────────
-            if (stats.history.isNotEmpty) ...[
-              const Divider(height: 1, color: AppColors.border),
-              const SizedBox(height: AppSpacing.xxl),
-
-              Text('HISTORY', style: AppTextStyles.categoryLabel),
-              const SizedBox(height: AppSpacing.lg),
-              for (final entry in stats.history.reversed) ...[
-                _HistoryRow(
-                  date: entry['date'] as String? ?? '',
-                  unitName:
-                      stats.problemMap[entry['problemId'] as String? ?? ''] ??
-                      '—',
-                  correct: entry['correct'] as bool? ?? false,
-                ),
-                const SizedBox(height: AppSpacing.md),
-              ],
-            ],
-
-            if (stats.history.isEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: AppSpacing.xl),
-                child: Text(
-                  'No questions answered yet.\nComplete your first question to see stats here.',
-                  style: AppTextStyles.categoryLabel,
-                ),
+            // ── History link ─────────────────────────────────────────
+            const Divider(height: 1, color: AppColors.border),
+            const SizedBox(height: AppSpacing.xxl),
+            GestureDetector(
+              onTap: stats.history.isEmpty
+                  ? null
+                  : () => context.push(AppRoutes.history),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('HISTORY', style: AppTextStyles.categoryLabel),
+                        const SizedBox(height: 4),
+                        Text(
+                          stats.history.isEmpty
+                              ? 'No questions answered yet.'
+                              : '${stats.history.length} question${stats.history.length == 1 ? '' : 's'} answered',
+                          style: AppTextStyles.trackTitle.copyWith(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (stats.history.isNotEmpty)
+                    Text(
+                      '→',
+                      style: AppTextStyles.categoryLabel.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                ],
               ),
+            ),
 
             const SizedBox(height: AppSpacing.xxl),
           ],
@@ -261,44 +272,6 @@ class _UnitAccuracyRow extends StatelessWidget {
         Text(
           '${accuracy.correct} of ${accuracy.total} correct',
           style: AppTextStyles.categoryLabel,
-        ),
-      ],
-    );
-  }
-}
-
-class _HistoryRow extends StatelessWidget {
-  const _HistoryRow({
-    required this.date,
-    required this.unitName,
-    required this.correct,
-  });
-
-  final String date;
-  final String unitName;
-  final bool correct;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          correct ? '✓' : '×',
-          style: AppTextStyles.categoryLabel.copyWith(
-            color: correct ? AppColors.text : AppColors.textSecondary,
-          ),
-        ),
-        const SizedBox(width: AppSpacing.sm),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(unitName, style: AppTextStyles.thinkingPattern),
-              const SizedBox(height: 2),
-              Text(date, style: AppTextStyles.categoryLabel),
-            ],
-          ),
         ),
       ],
     );

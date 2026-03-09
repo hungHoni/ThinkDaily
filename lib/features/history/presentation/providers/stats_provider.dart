@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:think_daily/features/history/data/sources/progress_service.dart';
+import 'package:think_daily/features/problem/data/models/problem.dart';
 import 'package:think_daily/features/problem/presentation/providers/problem_provider.dart';
 
 part 'stats_provider.g.dart';
@@ -18,6 +19,7 @@ class StatsData {
     required this.history,
     required this.unitAccuracy,
     required this.problemMap,
+    required this.problemById,
   });
 
   final List<Map<String, dynamic>> history;
@@ -25,6 +27,9 @@ class StatsData {
 
   // problemId → unitTitle lookup for history rows
   final Map<String, String> problemMap;
+
+  // problemId → full Problem — used by HistoryScreen to build ReviewArgs
+  final Map<String, Problem> problemById;
 }
 
 @riverpod
@@ -36,6 +41,7 @@ Future<StatsData> statsData(Ref ref) async {
   final allProblems = source.getAllProblems();
 
   final unitTitleById = {for (final p in allProblems) p.id: p.unitTitle};
+  final problemById = {for (final p in allProblems) p.id: p};
 
   final unitAccuracy = <String, UnitAccuracy>{};
   for (final entry in history) {
@@ -54,5 +60,6 @@ Future<StatsData> statsData(Ref ref) async {
     history: history,
     unitAccuracy: unitAccuracy,
     problemMap: unitTitleById,
+    problemById: problemById,
   );
 }

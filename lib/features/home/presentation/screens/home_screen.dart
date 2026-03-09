@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:think_daily/app/router.dart';
 import 'package:think_daily/core/theme/app_colors.dart';
+import 'package:think_daily/core/theme/app_spacing.dart';
 import 'package:think_daily/core/theme/app_text_styles.dart';
 import 'package:think_daily/features/history/data/sources/streak_service.dart';
 import 'package:think_daily/features/history/data/sources/xp_service.dart';
+import 'package:think_daily/features/home/presentation/providers/home_providers.dart';
+import 'package:think_daily/features/home/presentation/widgets/track_card.dart';
+import 'package:think_daily/features/home/presentation/widgets/xp_level_badge.dart';
 import 'package:think_daily/features/problem/data/sources/user_progress_service.dart';
 import 'package:think_daily/features/problem/presentation/providers/problem_provider.dart';
-
-const _trackId = 'problem-decomposition';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -43,18 +44,13 @@ class HomeScreen extends ConsumerWidget {
     final streakSvc = streakAsync.value!;
     final xpSvc = xpAsync.value!;
     final source = ref.watch(problemLocalSourceProvider);
+    final activeTrackId = ref.watch(activeTrackNotifierProvider);
 
-    final progress = progressSvc.getProgress(_trackId);
-    final units = source.getUnitsForTrack(_trackId);
     final tracks = source.getAllTracks();
-    final track = tracks.firstWhere((t) => t.id == _trackId);
-
-    final completedToday = progressSvc.hasCompletedToday(_trackId);
-    final currentUnit =
-        units.isNotEmpty && progress.currentUnitIndex < units.length
-            ? units[progress.currentUnitIndex]
-            : null;
-    final completedUnits = progress.currentUnitIndex;
+    final activeTrack = tracks.firstWhere((t) => t.id == activeTrackId);
+    final activeProgress = progressSvc.getProgress(activeTrackId);
+    final completedToday = progressSvc.hasCompletedToday(activeTrackId);
+    final trackDone = activeProgress.currentUnitIndex >= activeTrack.totalUnits;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -62,13 +58,13 @@ class HomeScreen extends ConsumerWidget {
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 480),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(28, 24, 28, 28),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // ── Header ──────────────────────────────────────
-                  Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // ── Header ──────────────────────────────────────────────
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
+                  child: Row(
                     children: [
                       Text('ThinkDaily', style: AppTextStyles.appTitle),
                       const Spacer(),
@@ -84,104 +80,93 @@ class HomeScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
+                ),
 
-                  const SizedBox(height: 36),
+                const SizedBox(height: 20),
 
-                  // ── Track label ──────────────────────────────────
-                  Text(
-                    track.title.toUpperCase(),
-                    style: AppTextStyles.categoryLabel,
+                // ── XP Level Badge ───────────────────────────────────────
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.screenHorizontal,
                   ),
+                  child: XpLevelBadge(xp: xpSvc.total),
+                ),
 
-                  const SizedBox(height: 12),
+                const SizedBox(height: 20),
+                const Divider(height: 1, color: AppColors.border),
 
-                  // ── Unit title ───────────────────────────────────
-                  if (currentUnit != null)
-                    Text(
-                      currentUnit.title,
-                      style: GoogleFonts.lora(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.text,
-                        height: 1.25,
-                        letterSpacing: 0.1,
-                      ),
-                    ),
+                // ── Track list ───────────────────────────────────────────
+                Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    itemCount: tracks.length,
+                    separatorBuilder: (_, __) =>
+                        const Divider(height: 1, color: AppColors.border),
+                    itemBuilder: (context, i) {
+                      final track = tracks[i];
+                      final progress = progressSvc.getProgress(track.id);
+                      final isActive = track.id == activeTrackId;
+                      return TrackCard(
+                        track: track,
+                        completedUnits: progress.currentUnitIndex,
+                        isActive: isActive,
+                        onTap: () =>
+                            context.push('${AppRoutes.track}/${track.id}'),
+                      );
+                    },
+                  ),
+                ),
 
-                  const SizedBox(height: 28),
+                const Divider(height: 1, color: AppColors.border),
 
-                  // ── Progress ─────────────────────────────────────
-                  Row(
+                // ── Stats + CTA ──────────────────────────────────────────
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(28, 16, 28, 28),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      for (var i = 0; i < track.totalUnits; i++) ...[
-                        if (i > 0) const SizedBox(width: 5),
-                        Expanded(
-                          child: Container(
-                            height: 2,
-                            color: i < completedUnits
-                                ? AppColors.text
-                                : i == completedUnits
-                                    ? AppColors.textSecondary
-                                    : AppColors.border,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            '${streakSvc.count}',
+                            style: AppTextStyles.trackTitle.copyWith(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            'day streak',
+                            style: AppTextStyles.sectionLabel,
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      if (completedToday || trackDone)
+                        _CompletedState(trackDone: trackDone)
+                      else
+                        SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              HapticFeedback.mediumImpact();
+                              context.push(AppRoutes.problem);
+                            },
+                            child: Text(
+                              "Begin today's question",
+                              style: AppTextStyles.buttonLabel,
+                            ),
                           ),
                         ),
-                      ],
                     ],
                   ),
-
-                  const SizedBox(height: 8),
-
-                  Text(
-                    'Unit ${completedUnits + 1} of ${track.totalUnits}',
-                    style: AppTextStyles.categoryLabel,
-                  ),
-
-                  const Spacer(),
-
-                  // ── Stats ────────────────────────────────────────
-                  Row(
-                    children: [
-                      Text(
-                        '${streakSvc.count}',
-                        style: AppTextStyles.thinkingPattern,
-                      ),
-                      const SizedBox(width: 4),
-                      Text('day streak', style: AppTextStyles.categoryLabel),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Text('·', style: AppTextStyles.categoryLabel),
-                      ),
-                      Text(
-                        '${xpSvc.total}',
-                        style: AppTextStyles.thinkingPattern,
-                      ),
-                      const SizedBox(width: 4),
-                      Text('xp', style: AppTextStyles.categoryLabel),
-                    ],
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  // ── CTA ──────────────────────────────────────────
-                  if (completedToday)
-                    const _CompletedState()
-                  else
-                    SizedBox(
-                      width: double.infinity,
-                      height: 56,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          HapticFeedback.mediumImpact();
-                          context.push(AppRoutes.problem);
-                        },
-                        child: Text(
-                          "Begin today's question",
-                          style: AppTextStyles.buttonLabel,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -191,17 +176,24 @@ class HomeScreen extends ConsumerWidget {
 }
 
 class _CompletedState extends StatelessWidget {
-  const _CompletedState();
+  const _CompletedState({required this.trackDone});
+
+  final bool trackDone;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Done for today.', style: AppTextStyles.doneMessage),
+        Text(
+          trackDone ? 'Track complete.' : 'Done for today.',
+          style: AppTextStyles.doneMessage,
+        ),
         const SizedBox(height: 4),
         Text(
-          'One question a day builds the habit.',
+          trackDone
+              ? 'Explore another track below.'
+              : 'One question a day builds the habit.',
           style: AppTextStyles.categoryLabel,
         ),
       ],

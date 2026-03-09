@@ -78,4 +78,20 @@ abstract class AppTextStyles {
     color: AppColors.text,
     height: 1.5,
   );
+
+  // Track / curriculum titles — Lora for warmth and readability
+  static TextStyle trackTitle = GoogleFonts.lora(
+    fontSize: 17,
+    fontWeight: FontWeight.w500,
+    color: AppColors.text,
+    height: 1.3,
+  );
+
+  // Section header inside track detail / stats
+  static TextStyle sectionLabel = GoogleFonts.jetBrainsMono(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textSecondary,
+    letterSpacing: 1.2,
+  );
 }
