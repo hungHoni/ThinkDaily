@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -53,15 +56,9 @@ class FeedbackScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.sm),
                     // Result label
                     if (noAnim)
-                      Text(
-                        isCorrect ? 'Correct.' : 'Not quite.',
-                        style: AppTextStyles.feedbackResult,
-                      )
+                      _ResultLabel(isCorrect: isCorrect)
                     else
-                      Text(
-                        isCorrect ? 'Correct.' : 'Not quite.',
-                        style: AppTextStyles.feedbackResult,
-                      )
+                      _ResultLabel(isCorrect: isCorrect)
                           .animate()
                           .fadeIn(duration: const Duration(milliseconds: 300))
                           .moveY(
@@ -147,6 +144,7 @@ class FeedbackScreen extends ConsumerWidget {
                 height: 52,
                 child: ElevatedButton(
                   onPressed: () async {
+                    unawaited(HapticFeedback.mediumImpact());
                     // Save to history
                     final progressSvc =
                         await ref.read(progressServiceProvider.future);
@@ -184,6 +182,30 @@ class FeedbackScreen extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ResultLabel extends StatelessWidget {
+  const _ResultLabel({required this.isCorrect});
+
+  final bool isCorrect;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          isCorrect ? 'CORRECT' : 'NOT QUITE',
+          style: AppTextStyles.categoryLabel,
+        ),
+        const SizedBox(height: 6),
+        Text(
+          isCorrect ? 'Well reasoned.' : "Here's the right answer.",
+          style: AppTextStyles.doneMessage,
+        ),
+      ],
     );
   }
 }

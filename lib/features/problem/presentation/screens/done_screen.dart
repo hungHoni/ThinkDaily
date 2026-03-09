@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,6 +20,7 @@ class DoneScreen extends ConsumerWidget {
 
     final streak = streakAsync.valueOrNull?.count ?? 0;
     final xp = xpAsync.valueOrNull?.total ?? 0;
+    final noAnim = MediaQuery.of(context).disableAnimations;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -29,20 +31,99 @@ class DoneScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Spacer(),
-              Text('Nicely done.', style: AppTextStyles.doneMessage),
+
+              // Headline
+              if (noAnim)
+                Text('Nicely done.', style: AppTextStyles.doneMessage)
+              else
+                Text('Nicely done.', style: AppTextStyles.doneMessage)
+                    .animate()
+                    .fadeIn(duration: 500.ms)
+                    .moveY(
+                      begin: 12,
+                      end: 0,
+                      duration: 500.ms,
+                      curve: Curves.easeOut,
+                    ),
+
               const SizedBox(height: AppSpacing.xxl),
-              _StatRow(label: 'DAY STREAK', value: '$streak'),
+
+              // Streak stat
+              if (noAnim)
+                _StatRow(label: 'DAY STREAK', value: streak)
+              else
+                _StatRow(label: 'DAY STREAK', value: streak)
+                    .animate(delay: 300.ms)
+                    .fadeIn(duration: 400.ms)
+                    .moveY(
+                      begin: 8,
+                      end: 0,
+                      duration: 400.ms,
+                      curve: Curves.easeOut,
+                    ),
+
               const SizedBox(height: AppSpacing.lg),
-              _StatRow(label: 'XP TOTAL', value: '$xp'),
+
+              // XP stat
+              if (noAnim)
+                _StatRow(label: 'XP TOTAL', value: xp)
+              else
+                _StatRow(label: 'XP TOTAL', value: xp)
+                    .animate(delay: 500.ms)
+                    .fadeIn(duration: 400.ms)
+                    .moveY(
+                      begin: 8,
+                      end: 0,
+                      duration: 400.ms,
+                      curve: Curves.easeOut,
+                    ),
+
+              // Streak milestone note
+              if (streak > 0 && streak % 7 == 0) ...[
+                const SizedBox(height: AppSpacing.md),
+                if (noAnim)
+                  Text(
+                    '$streak day milestone.',
+                    style: AppTextStyles.categoryLabel,
+                  )
+                else
+                  Text(
+                    '$streak day milestone.',
+                    style: AppTextStyles.categoryLabel,
+                  )
+                      .animate(delay: 700.ms)
+                      .fadeIn(duration: 400.ms),
+              ],
+
               const Spacer(flex: 2),
-              SizedBox(
-                width: double.infinity,
-                height: 52,
-                child: ElevatedButton(
-                  onPressed: () => context.go(AppRoutes.home),
-                  child: Text('Back to Home', style: AppTextStyles.buttonLabel),
-                ),
-              ),
+
+              if (noAnim)
+                SizedBox(
+                  width: double.infinity,
+                  height: 52,
+                  child: ElevatedButton(
+                    onPressed: () => context.go(AppRoutes.home),
+                    child: Text('Back to Home', style: AppTextStyles.buttonLabel),
+                  ),
+                )
+              else
+                SizedBox(
+                  width: double.infinity,
+                  height: 52,
+                  child: ElevatedButton(
+                    onPressed: () => context.go(AppRoutes.home),
+                    child: Text('Back to Home', style: AppTextStyles.buttonLabel),
+                  ),
+                )
+                    .animate(delay: 700.ms)
+                    .fadeIn(duration: 400.ms)
+                    .moveY(
+                      begin: 8,
+                      end: 0,
+                      duration: 400.ms,
+                      curve: Curves.easeOut,
+                    ),
+
               const SizedBox(height: AppSpacing.lg),
             ],
           ),
@@ -56,7 +137,7 @@ class _StatRow extends StatelessWidget {
   const _StatRow({required this.label, required this.value});
 
   final String label;
-  final String value;
+  final int value;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +145,14 @@ class _StatRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.alphabetic,
       children: [
-        Text(value, style: AppTextStyles.appTitle),
+        TweenAnimationBuilder<int>(
+          tween: IntTween(begin: 0, end: value),
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.easeOut,
+          builder: (context, animatedValue, _) {
+            return Text('$animatedValue', style: AppTextStyles.appTitle);
+          },
+        ),
         const SizedBox(width: AppSpacing.sm),
         Text(label, style: AppTextStyles.categoryLabel),
       ],

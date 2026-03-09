@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:think_daily/core/theme/app_colors.dart';
 import 'package:think_daily/core/theme/app_spacing.dart';
@@ -54,7 +55,12 @@ class _OptionTile extends StatelessWidget {
       curve: Curves.easeOut,
       color: isSelected ? AppColors.invertedBackground : AppColors.background,
       child: InkWell(
-        onTap: onTap,
+        onTap: onTap == null
+            ? null
+            : () {
+                HapticFeedback.selectionClick();
+                onTap!();
+              },
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.screenHorizontal,

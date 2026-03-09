@@ -1,5 +1,72 @@
 {
   "skills": {
+    "thinkdaily-ui": {
+      "type": "domain",
+      "enforcement": "require",
+      "priority": "critical",
+      "promptTriggers": {
+        "keywords": [
+          "ui",
+          "design",
+          "screen",
+          "widget",
+          "layout",
+          "color",
+          "dark mode",
+          "animation",
+          "visual",
+          "style",
+          "theme",
+          "typography",
+          "font",
+          "spacing",
+          "padding",
+          "homescreen",
+          "problemscreen",
+          "feedbackscreen",
+          "statsscreen",
+          "donescreen",
+          "splash",
+          "improve",
+          "redesign",
+          "polish",
+          "look",
+          "feel",
+          "disappointing",
+          "plain",
+          "boring",
+          "haptic",
+          "animate",
+          "beautiful",
+          "appcolors",
+          "apptextstyles",
+          "appspacing",
+          "apptheme"
+        ],
+        "intentPatterns": [
+          "(improve|fix|redesign|enhance|update).*(ui|design|screen|look|feel|visual)",
+          "(add|implement|setup).*(dark mode|dark theme|theme toggle)",
+          "(make|it).*(look|feel|seem).*(better|nicer|cleaner|polished|beautiful)",
+          "(ui|design|screen).*(disappointing|plain|boring|lacking|bad|ugly)",
+          "(add|implement).*(animation|haptic|feedback|micro|transition)",
+          "(improve|enhance|fix).*(stats|done|feedback|home|problem).*(screen|page)",
+          "(add|show|display).*(streak|xp|progress|stats).*(visual|chart|graph|bar)",
+          "color.*scheme",
+          "design.*system",
+          "what.*wrong.*ui"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "lib/core/theme/**",
+          "lib/core/widgets/**",
+          "lib/features/*/presentation/screens/**",
+          "lib/features/*/presentation/widgets/**",
+          "lib/features/home/**",
+          "lib/app/app.dart"
+        ]
+      }
+    },
     "flutter-dev-guidelines": {
       "type": "domain",
       "enforcement": "suggest",

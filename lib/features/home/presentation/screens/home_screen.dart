@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -169,7 +170,10 @@ class HomeScreen extends ConsumerWidget {
                       width: double.infinity,
                       height: 56,
                       child: ElevatedButton(
-                        onPressed: () => context.push(AppRoutes.problem),
+                        onPressed: () {
+                          HapticFeedback.mediumImpact();
+                          context.push(AppRoutes.problem);
+                        },
                         child: Text(
                           "Begin today's question",
                           style: AppTextStyles.buttonLabel,

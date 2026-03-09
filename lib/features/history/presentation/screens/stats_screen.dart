@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -82,6 +83,9 @@ class _StatsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final noAnim = MediaQuery.of(context).disableAnimations;
+    final accuracyEntries = stats.unitAccuracy.entries.toList();
+
     return Expanded(
       child: SingleChildScrollView(
         padding: AppSpacing.pagePadding,
@@ -90,41 +94,72 @@ class _StatsBody extends StatelessWidget {
           children: [
             const SizedBox(height: AppSpacing.lg),
 
-            // Streak
+            // ── Streak ──────────────────────────────────────────────
             Text('STREAK', style: AppTextStyles.categoryLabel),
             const SizedBox(height: AppSpacing.md),
-            Row(
-              children: [
-                _BigStat(value: '${streak.count}', label: 'CURRENT'),
-                const SizedBox(width: AppSpacing.xl),
-                _BigStat(value: '${streak.best}', label: 'BEST'),
-              ],
-            ),
+            if (noAnim)
+              Row(
+                children: [
+                  _BigStat(value: '${streak.count}', label: 'CURRENT'),
+                  const SizedBox(width: AppSpacing.xl),
+                  _BigStat(value: '${streak.best}', label: 'BEST'),
+                ],
+              )
+            else
+              Row(
+                children: [
+                  _BigStat(value: '${streak.count}', label: 'CURRENT'),
+                  const SizedBox(width: AppSpacing.xl),
+                  _BigStat(value: '${streak.best}', label: 'BEST'),
+                ],
+              )
+                  .animate()
+                  .fadeIn(duration: 400.ms)
+                  .moveY(begin: 8, end: 0, duration: 400.ms, curve: Curves.easeOut),
 
             const SizedBox(height: AppSpacing.xxl),
             const Divider(height: 1, color: AppColors.border),
             const SizedBox(height: AppSpacing.xxl),
 
-            // XP
+            // ── XP ──────────────────────────────────────────────────
             Text('EXPERIENCE', style: AppTextStyles.categoryLabel),
             const SizedBox(height: AppSpacing.md),
-            _BigStat(value: '${xp.total}', label: 'XP TOTAL'),
+            if (noAnim)
+              _BigStat(value: '${xp.total}', label: 'XP TOTAL')
+            else
+              _BigStat(value: '${xp.total}', label: 'XP TOTAL')
+                  .animate(delay: 100.ms)
+                  .fadeIn(duration: 400.ms)
+                  .moveY(begin: 8, end: 0, duration: 400.ms, curve: Curves.easeOut),
 
-            if (stats.unitAccuracy.isNotEmpty) ...[
+            // ── Accuracy by unit ────────────────────────────────────
+            if (accuracyEntries.isNotEmpty) ...[
               const SizedBox(height: AppSpacing.xxl),
               const Divider(height: 1, color: AppColors.border),
               const SizedBox(height: AppSpacing.xxl),
 
               Text('ACCURACY BY UNIT', style: AppTextStyles.categoryLabel),
               const SizedBox(height: AppSpacing.lg),
-              for (final entry in stats.unitAccuracy.entries) ...[
-                _UnitAccuracyRow(unitName: entry.key, accuracy: entry.value),
-                const SizedBox(height: AppSpacing.md),
+              for (var i = 0; i < accuracyEntries.length; i++) ...[
+                if (noAnim)
+                  _UnitAccuracyRow(
+                    unitName: accuracyEntries[i].key,
+                    accuracy: accuracyEntries[i].value,
+                  )
+                else
+                  _UnitAccuracyRow(
+                    unitName: accuracyEntries[i].key,
+                    accuracy: accuracyEntries[i].value,
+                  )
+                      .animate(delay: Duration(milliseconds: 80 * i))
+                      .fadeIn(duration: 300.ms)
+                      .moveY(begin: 6, end: 0, duration: 300.ms, curve: Curves.easeOut),
+                const SizedBox(height: AppSpacing.xl),
               ],
             ],
 
+            // ── History ─────────────────────────────────────────────
             if (stats.history.isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.xxl),
               const Divider(height: 1, color: AppColors.border),
               const SizedBox(height: AppSpacing.xxl),
 
@@ -186,12 +221,45 @@ class _UnitAccuracyRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    final pct = accuracy.pct.clamp(0, 100) / 100;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(child: Text(unitName, style: AppTextStyles.thinkingPattern)),
-        const SizedBox(width: AppSpacing.md),
+        Row(
+          children: [
+            Expanded(
+              child: Text(unitName, style: AppTextStyles.thinkingPattern),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Text('${accuracy.pct}%', style: AppTextStyles.categoryLabel),
+          ],
+        ),
+        const SizedBox(height: 8),
+        // Progress bar
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return Stack(
+              children: [
+                Container(
+                  height: 2,
+                  width: constraints.maxWidth,
+                  color: AppColors.border,
+                ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 700),
+                  curve: Curves.easeOut,
+                  height: 2,
+                  width: constraints.maxWidth * pct,
+                  color: AppColors.text,
+                ),
+              ],
+            );
+          },
+        ),
+        const SizedBox(height: 4),
         Text(
-          '${accuracy.correct}/${accuracy.total} (${accuracy.pct}%)',
+          '${accuracy.correct} of ${accuracy.total} correct',
           style: AppTextStyles.categoryLabel,
         ),
       ],
