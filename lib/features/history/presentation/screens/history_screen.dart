@@ -30,7 +30,9 @@ class HistoryScreen extends ConsumerWidget {
                   child: Row(
                     children: [
                       GestureDetector(
-                        onTap: () => context.pop(),
+                        onTap: () => context.canPop()
+                            ? context.pop()
+                            : context.go(AppRoutes.stats),
                         child: Text(
                           '←',
                           style: AppTextStyles.categoryLabel.copyWith(

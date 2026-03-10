@@ -78,7 +78,9 @@ class ReviewScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       GestureDetector(
-                        onTap: () => context.pop(),
+                        onTap: () => context.canPop()
+                            ? context.pop()
+                            : context.go(AppRoutes.history),
                         child: Text(
                           '←',
                           style: AppTextStyles.categoryLabel.copyWith(

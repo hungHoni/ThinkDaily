@@ -38,7 +38,9 @@ class StatsScreen extends ConsumerWidget {
                 children: [
                   Expanded(child: Text('Stats', style: AppTextStyles.appTitle)),
                   IconButton(
-                    onPressed: () => context.pop(),
+                    onPressed: () => context.canPop()
+                        ? context.pop()
+                        : context.go(AppRoutes.home),
                     icon: const Icon(Icons.close, color: AppColors.text),
                     padding: EdgeInsets.zero,
                   ),

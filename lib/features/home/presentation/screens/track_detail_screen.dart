@@ -55,7 +55,9 @@ class TrackDetailScreen extends ConsumerWidget {
                   child: Row(
                     children: [
                       GestureDetector(
-                        onTap: () => context.pop(),
+                        onTap: () => context.canPop()
+                            ? context.pop()
+                            : context.go(AppRoutes.home),
                         child: Text(
                           '←',
                           style: AppTextStyles.categoryLabel.copyWith(

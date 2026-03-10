@@ -62,11 +62,10 @@ final router = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.feedback,
-      pageBuilder: (_, state) {
-        final args = state.extra as FeedbackArgs?;
-        if (args == null) return _fadePage(state, const ProblemScreen());
-        return _fadePage(state, FeedbackScreen(args: args));
-      },
+      redirect: (_, state) =>
+          state.extra is FeedbackArgs ? null : AppRoutes.home,
+      pageBuilder: (_, state) =>
+          _fadePage(state, FeedbackScreen(args: state.extra! as FeedbackArgs)),
     ),
     GoRoute(
       path: AppRoutes.done,
