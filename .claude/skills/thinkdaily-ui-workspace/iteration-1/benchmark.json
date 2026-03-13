@@ -1,0 +1,363 @@
+{
+  "metadata": {
+    "skill_name": "thinkdaily-ui",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-03-10T16:20:33Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 201.3,
+        "tokens": 26717,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "References AppTextStyles.* constants (not raw GoogleFonts or inline TextStyle with font families)",
+          "passed": true,
+          "evidence": "14 AppTextStyles. references found"
+        },
+        {
+          "text": "References AppColors.* constants (no Color(0xFF...) literals in the widget)",
+          "passed": true,
+          "evidence": "18 AppColors. references, 0 raw Color(0x literals"
+        },
+        {
+          "text": "References AppSpacing.* constants for at least some spacing",
+          "passed": true,
+          "evidence": "29 AppSpacing. references found"
+        },
+        {
+          "text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY()) for entry animations",
+          "passed": true,
+          "evidence": "2 animate references found in file"
+        },
+        {
+          "text": "No Card() widgets or BoxDecoration with boxShadow \u2014 design remains flat",
+          "passed": true,
+          "evidence": "0 elevation: or boxShadow found"
+        },
+        {
+          "text": "No Colors.blue, Colors.green, Colors.purple, Colors.teal, or similar colorful accent references",
+          "passed": true,
+          "evidence": "0 colorful Colors.* accent references found"
+        },
+        {
+          "text": "Has visual progress indicators rather than text-only accuracy/category stats",
+          "passed": true,
+          "evidence": "2 matches for LinearProgressIndicator/AnimatedContainer found"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 986.2,
+        "tokens": 29616,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY() or similar) for entry animations",
+          "passed": true,
+          "evidence": "3 .animate()/.fadeIn()/.moveY() references found"
+        },
+        {
+          "text": "Checks MediaQuery.of(context).disableAnimations (respects accessibility reduced motion setting)",
+          "passed": true,
+          "evidence": "2 disableAnimations references found \u2014 full noAnim path implemented"
+        },
+        {
+          "text": "Multiple elements use staggered animation delays for sequential reveals",
+          "passed": true,
+          "evidence": "8 delay:.*ms references found \u2014 multiple staggered delays"
+        },
+        {
+          "text": "References AppTextStyles.* (no inline TextStyle with raw font sizes)",
+          "passed": true,
+          "evidence": "8 AppTextStyles. references found"
+        },
+        {
+          "text": "References AppColors.* (no Color(0xFF...) literals)",
+          "passed": true,
+          "evidence": "4 AppColors. references, 0 raw Color(0x literals"
+        },
+        {
+          "text": "No colorful accent colors \u2014 stays monochromatic",
+          "passed": true,
+          "evidence": "0 colorful Colors.* accent references found"
+        },
+        {
+          "text": "Stats or numbers have some form of animation (counting up, fade in, or slide in)",
+          "passed": true,
+          "evidence": "11 references to TweenAnimationBuilder/_AnimatedCounter/_Animated patterns \u2014 count-up animation implemented"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 1346.0,
+        "tokens": 30375,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "HapticFeedback.selectionClick() is called when a user taps an answer option in ProblemScreen",
+          "passed": true,
+          "evidence": "2 selectionClick references found"
+        },
+        {
+          "text": "HapticFeedback.mediumImpact() is called when the submit/CTA button is tapped in ProblemScreen",
+          "passed": true,
+          "evidence": "2 mediumImpact references found"
+        },
+        {
+          "text": "The Correct/Not quite result label in FeedbackScreen has a larger font size or heavier font weight than the original",
+          "passed": true,
+          "evidence": "3 matches for appTitle/large font style \u2014 uses AppTextStyles.appTitle (28px, w500) vs original doneMessage (22px, w400)"
+        },
+        {
+          "text": "No new Color(0xFF...) or Colors.green/Colors.red literals added for the result label \u2014 stays monochromatic",
+          "passed": true,
+          "evidence": "0 new color literals in feedback_result_improved.dart"
+        },
+        {
+          "text": "Result label references AppTextStyles.* rather than an inline TextStyle with hardcoded values",
+          "passed": true,
+          "evidence": "11 AppTextStyles. references found in feedback_result_improved.dart"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5714,
+        "passed": 4,
+        "failed": 3,
+        "total": 7,
+        "time_seconds": 206.6,
+        "tokens": 21065,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "References AppTextStyles.* constants (not raw GoogleFonts or inline TextStyle with font families)",
+          "passed": true,
+          "evidence": "12 AppTextStyles. references found \u2014 agent read theme files and used them"
+        },
+        {
+          "text": "References AppColors.* constants (no Color(0xFF...) literals in the widget)",
+          "passed": false,
+          "evidence": "3 raw Color(0x literals found \u2014 _barColor() method defines hardcoded hex for green/amber/red"
+        },
+        {
+          "text": "References AppSpacing.* constants for at least some spacing",
+          "passed": true,
+          "evidence": "23 AppSpacing. references found"
+        },
+        {
+          "text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY()) for entry animations",
+          "passed": false,
+          "evidence": "0 .animate() calls found \u2014 used AnimatedContainer instead"
+        },
+        {
+          "text": "No Card() widgets or BoxDecoration with boxShadow \u2014 design remains flat",
+          "passed": true,
+          "evidence": "0 elevation: or boxShadow found"
+        },
+        {
+          "text": "No Colors.blue, Colors.green, Colors.purple, Colors.teal, or similar colorful accent references",
+          "passed": false,
+          "evidence": "Agent added Color(0xFF2D8653) green, Color(0xFFB07D2B) amber, Color(0xFFB03030) red as semantic progress bar colors \u2014 breaks monochromatic palette"
+        },
+        {
+          "text": "Has visual progress indicators rather than text-only accuracy/category stats",
+          "passed": true,
+          "evidence": "1 visual bar indicator found"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.7143,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "time_seconds": 190.96,
+        "tokens": 19693,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY() or similar) for entry animations",
+          "passed": true,
+          "evidence": "13 .animate()/.fadeIn()/.moveY() references found \u2014 agent used flutter_animate"
+        },
+        {
+          "text": "Checks MediaQuery.of(context).disableAnimations (respects accessibility reduced motion setting)",
+          "passed": true,
+          "evidence": "1 disableAnimations reference found"
+        },
+        {
+          "text": "Multiple elements use staggered animation delays for sequential reveals",
+          "passed": true,
+          "evidence": "11 delay:.*ms references found"
+        },
+        {
+          "text": "References AppTextStyles.* (no inline TextStyle with raw font sizes)",
+          "passed": true,
+          "evidence": "7 AppTextStyles. references found"
+        },
+        {
+          "text": "References AppColors.* (no Color(0xFF...) literals)",
+          "passed": false,
+          "evidence": "4 raw Color(0x literals found \u2014 agent added confetti particle colors and shimmer colors not in AppColors"
+        },
+        {
+          "text": "No colorful accent colors \u2014 stays monochromatic",
+          "passed": false,
+          "evidence": "Agent added confetti painters, shimmer sweeps, and colored milestone banners \u2014 breaks the editorial monochromatic design language"
+        },
+        {
+          "text": "Stats or numbers have some form of animation (counting up, fade in, or slide in)",
+          "passed": true,
+          "evidence": "7 TweenAnimationBuilder references found \u2014 animated counters implemented"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 209.4,
+        "tokens": 23755,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "HapticFeedback.selectionClick() is called when a user taps an answer option in ProblemScreen",
+          "passed": true,
+          "evidence": "2 selectionClick references found"
+        },
+        {
+          "text": "HapticFeedback.mediumImpact() is called when the submit/CTA button is tapped in ProblemScreen",
+          "passed": true,
+          "evidence": "2 mediumImpact references found"
+        },
+        {
+          "text": "The Correct/Not quite result label in FeedbackScreen has a larger font size or heavier font weight than the original",
+          "passed": true,
+          "evidence": "1 match for large font \u2014 used Lora at fontSize 36"
+        },
+        {
+          "text": "No new Color(0xFF...) or Colors.green/Colors.red literals added for the result label \u2014 stays monochromatic",
+          "passed": true,
+          "evidence": "0 new Color literals in feedback_result_improved.dart \u2014 used AppColors.text and AppColors.textSecondary"
+        },
+        {
+          "text": "Result label references AppTextStyles.* rather than an inline TextStyle with hardcoded values",
+          "passed": false,
+          "evidence": "9 AppTextStyles. references but agent also added inline Lora TextStyle with fontSize: 36 and hardcoded letterSpacing \u2014 did not use an AppTextStyles constant"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 844.5,
+        "stddev": 585.3577,
+        "min": 201.3,
+        "max": 1346.0
+      },
+      "tokens": {
+        "mean": 28902.6667,
+        "stddev": 1930.5114,
+        "min": 26717,
+        "max": 30375
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.6952,
+        "stddev": 0.1155,
+        "min": 0.5714,
+        "max": 0.8
+      },
+      "time_seconds": {
+        "mean": 202.32,
+        "stddev": 9.9372,
+        "min": 190.96,
+        "max": 209.4
+      },
+      "tokens": {
+        "mean": 21504.3333,
+        "stddev": 2066.3304,
+        "min": 19693,
+        "max": 23755
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.30",
+      "time_seconds": "+642.2",
+      "tokens": "+7398"
+    }
+  },
+  "notes": []
+}

@@ -1,0 +1,35 @@
+{
+  "eval_id": 1,
+  "eval_name": "done-screen-celebration",
+  "prompt": "Add a celebratory feel to DoneScreen — animate stats counting up, add entry animations using flutter_animate. Keep minimal editorial style, no colorful confetti.",
+  "assertions": [
+    {
+      "id": "uses_flutter_animate",
+      "text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY() or similar) for entry animations"
+    },
+    {
+      "id": "checks_disable_animations",
+      "text": "Checks MediaQuery.of(context).disableAnimations (respects accessibility reduced motion setting)"
+    },
+    {
+      "id": "has_staggered_delays",
+      "text": "Multiple elements use staggered animation delays (e.g., delay: 200.ms, delay: 400.ms) for sequential reveals"
+    },
+    {
+      "id": "uses_app_text_styles",
+      "text": "References AppTextStyles.* (no inline TextStyle with raw font sizes)"
+    },
+    {
+      "id": "uses_app_colors",
+      "text": "References AppColors.* (no Color(0xFF...) literals)"
+    },
+    {
+      "id": "no_colorful_accents",
+      "text": "No colorful accent colors (Colors.yellow, Colors.confetti, Colors.green for 'success', etc.) — stays monochromatic"
+    },
+    {
+      "id": "has_stat_animation",
+      "text": "Stats or numbers have some form of animation (counting up, fade in, or slide in)"
+    }
+  ]
+}

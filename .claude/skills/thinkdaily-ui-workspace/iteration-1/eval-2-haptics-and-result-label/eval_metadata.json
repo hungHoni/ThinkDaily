@@ -1,0 +1,27 @@
+{
+  "eval_id": 2,
+  "eval_name": "haptics-and-result-label",
+  "prompt": "Add haptic feedback to ProblemScreen option taps and submit button. Make the Correct/Not quite result label more visually impactful using typography only (no color).",
+  "assertions": [
+    {
+      "id": "has_selection_click_haptic",
+      "text": "HapticFeedback.selectionClick() is called when a user taps an answer option in ProblemScreen"
+    },
+    {
+      "id": "has_medium_impact_haptic",
+      "text": "HapticFeedback.mediumImpact() is called when the submit/CTA button is tapped in ProblemScreen"
+    },
+    {
+      "id": "result_label_typography_change",
+      "text": "The Correct/Not quite result label in FeedbackScreen has a larger font size or heavier font weight than the original"
+    },
+    {
+      "id": "no_new_color_literals",
+      "text": "No new Color(0xFF...) or Colors.green/Colors.red literals added for the result label — stays monochromatic"
+    },
+    {
+      "id": "uses_app_text_styles",
+      "text": "Result label references AppTextStyles.* rather than an inline TextStyle with hardcoded values"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "References AppTextStyles.* constants (not raw GoogleFonts or inline TextStyle with font families)",
+      "passed": true,
+      "evidence": "14 AppTextStyles. references found"
+    },
+    {
+      "text": "References AppColors.* constants (no Color(0xFF...) literals in the widget)",
+      "passed": true,
+      "evidence": "18 AppColors. references, 0 raw Color(0x literals"
+    },
+    {
+      "text": "References AppSpacing.* constants for at least some spacing",
+      "passed": true,
+      "evidence": "29 AppSpacing. references found"
+    },
+    {
+      "text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY()) for entry animations",
+      "passed": true,
+      "evidence": "2 animate references found in file"
+    },
+    {
+      "text": "No Card() widgets or BoxDecoration with boxShadow \u2014 design remains flat",
+      "passed": true,
+      "evidence": "0 elevation: or boxShadow found"
+    },
+    {
+      "text": "No Colors.blue, Colors.green, Colors.purple, Colors.teal, or similar colorful accent references",
+      "passed": true,
+      "evidence": "0 colorful Colors.* accent references found"
+    },
+    {
+      "text": "Has visual progress indicators rather than text-only accuracy/category stats",
+      "passed": true,
+      "evidence": "2 matches for LinearProgressIndicator/AnimatedContainer found"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "skill_name": "thinkdaily-ui",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "The StatsScreen in my Flutter app ThinkDaily looks too plain — it's just text everywhere with no visual hierarchy. Improve the UI. The screen shows: total problems solved, current streak, accuracy %, and a breakdown by category. Make it look better while keeping the minimal editorial style. The app uses flutter_animate for animations and has AppColors, AppTextStyles, and AppSpacing defined. Save your improved widget code to outputs/stats_screen_improved.dart",
+      "expected_output": "Improved StatsScreen using AppTextStyles.*, AppColors.*, AppSpacing.* constants, flutter_animate for entry animations, visual progress bars or indicators, no hardcoded colors or font sizes, no Card widgets with shadows, no colorful accents.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "The DoneScreen in my ThinkDaily Flutter app shows the user their session results (problems solved, accuracy) but feels flat and anti-climactic. Add a celebratory feel to it — animate the stats counting up, add a satisfying entry animation, make it feel like an accomplishment. The app uses flutter_animate and the design system has AppTextStyles, AppColors, AppSpacing. Keep the minimal editorial style — no colorful confetti or bright accents. Save to outputs/done_screen_improved.dart",
+      "expected_output": "DoneScreen with flutter_animate entry animations (fadeIn + moveY), stat numbers that animate counting up, no hardcoded colors, no Card shadows, uses AppTextStyles/AppColors/AppSpacing, checks MediaQuery.disableAnimations, feels celebratory but minimal.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "In my ThinkDaily Flutter app, when a user taps an answer option in ProblemScreen, there's no haptic feedback. Also the 'Correct.' / 'Not quite.' result label on FeedbackScreen feels too small and understated. Fix both issues. For haptic: add HapticFeedback.selectionClick() on option tap and HapticFeedback.mediumImpact() on submit. For the result label: make it more visually impactful without adding color — use typography size/weight changes. Save output to outputs/problem_screen_haptics.dart and outputs/feedback_result_improved.dart",
+      "expected_output": "Code snippets with HapticFeedback calls in right places, result label using AppTextStyles with larger size or heavier weight, no added colors (stays monochromatic), no hardcoded values.",
+      "files": []
+    }
+  ]
+}

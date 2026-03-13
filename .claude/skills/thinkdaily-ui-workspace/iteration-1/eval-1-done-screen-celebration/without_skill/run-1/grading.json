@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY() or similar) for entry animations",
+      "passed": true,
+      "evidence": "13 .animate()/.fadeIn()/.moveY() references found \u2014 agent used flutter_animate"
+    },
+    {
+      "text": "Checks MediaQuery.of(context).disableAnimations (respects accessibility reduced motion setting)",
+      "passed": true,
+      "evidence": "1 disableAnimations reference found"
+    },
+    {
+      "text": "Multiple elements use staggered animation delays for sequential reveals",
+      "passed": true,
+      "evidence": "11 delay:.*ms references found"
+    },
+    {
+      "text": "References AppTextStyles.* (no inline TextStyle with raw font sizes)",
+      "passed": true,
+      "evidence": "7 AppTextStyles. references found"
+    },
+    {
+      "text": "References AppColors.* (no Color(0xFF...) literals)",
+      "passed": false,
+      "evidence": "4 raw Color(0x literals found \u2014 agent added confetti particle colors and shimmer colors not in AppColors"
+    },
+    {
+      "text": "No colorful accent colors \u2014 stays monochromatic",
+      "passed": false,
+      "evidence": "Agent added confetti painters, shimmer sweeps, and colored milestone banners \u2014 breaks the editorial monochromatic design language"
+    },
+    {
+      "text": "Stats or numbers have some form of animation (counting up, fade in, or slide in)",
+      "passed": true,
+      "evidence": "7 TweenAnimationBuilder references found \u2014 animated counters implemented"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 2,
+    "total": 7,
+    "pass_rate": 0.7143
+  }
+}

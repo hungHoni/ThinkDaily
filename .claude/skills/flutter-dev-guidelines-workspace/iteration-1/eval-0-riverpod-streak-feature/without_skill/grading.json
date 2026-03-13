@@ -1,0 +1,11 @@
+{
+  "expectations": [
+    {"text": "Provider is defined using @riverpod annotation (code generation pattern)", "passed": true, "evidence": "2 occurrences of @riverpod found — agent also used @riverpod without the skill"},
+    {"text": "Widget class extends ConsumerWidget (not StatefulWidget or plain StatelessWidget)", "passed": true, "evidence": "ConsumerWidget found in streak_widget.dart"},
+    {"text": "AsyncValue.when() is used to handle all three states: data, loading, and error", "passed": true, "evidence": "2 occurrences of .when( found"},
+    {"text": "No setState() calls appear anywhere in the output code", "passed": true, "evidence": "0 occurrences of setState( found"},
+    {"text": "An abstract StreakRepository interface class is defined, separate from the implementation", "passed": true, "evidence": "abstract class Streak found"},
+    {"text": "A concrete StreakRepositoryImpl class implements the abstract interface", "passed": true, "evidence": "implements StreakRepository found"},
+    {"text": "Widget constructors use const keyword", "passed": true, "evidence": "23 occurrences of const constructors found"}
+  ]
+}

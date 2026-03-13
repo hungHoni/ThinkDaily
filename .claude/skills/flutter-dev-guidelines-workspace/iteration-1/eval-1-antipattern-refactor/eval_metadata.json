@@ -1,0 +1,35 @@
+{
+  "eval_id": 1,
+  "eval_name": "antipattern-refactor",
+  "prompt": "Refactor this Flutter code with anti-patterns. Rewrite it the right way.",
+  "assertions": [
+    {
+      "id": "no_set_state",
+      "text": "No setState() calls in the refactored HomeScreen — state is managed by Riverpod"
+    },
+    {
+      "id": "no_navigator_push",
+      "text": "No Navigator.push() or MaterialPageRoute — navigation uses context.go() or context.push()"
+    },
+    {
+      "id": "no_dio_in_widget",
+      "text": "No direct Dio() instantiation in the widget file — API calls are in a repository/provider"
+    },
+    {
+      "id": "no_hardcoded_color",
+      "text": "No Color(0xFF...) literal in the widget file — colors reference AppColors.* or Theme.of(context)"
+    },
+    {
+      "id": "no_hardcoded_textstyle",
+      "text": "No inline TextStyle(fontSize: ...) with hardcoded values in the widget"
+    },
+    {
+      "id": "uses_consumer_widget",
+      "text": "HomeScreen extends ConsumerWidget (not StatefulWidget)"
+    },
+    {
+      "id": "uses_async_value_when",
+      "text": "AsyncValue.when() used to handle loading/data/error states"
+    }
+  ]
+}

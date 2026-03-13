@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "HapticFeedback.selectionClick() is called when a user taps an answer option in ProblemScreen", "passed": true, "evidence": "2 selectionClick references found"},
+    {"text": "HapticFeedback.mediumImpact() is called when the submit/CTA button is tapped in ProblemScreen", "passed": true, "evidence": "2 mediumImpact references found"},
+    {"text": "The Correct/Not quite result label in FeedbackScreen has a larger font size or heavier font weight than the original", "passed": true, "evidence": "3 matches for appTitle/large font style — uses AppTextStyles.appTitle (28px, w500) vs original doneMessage (22px, w400)"},
+    {"text": "No new Color(0xFF...) or Colors.green/Colors.red literals added for the result label — stays monochromatic", "passed": true, "evidence": "0 new color literals in feedback_result_improved.dart"},
+    {"text": "Result label references AppTextStyles.* rather than an inline TextStyle with hardcoded values", "passed": true, "evidence": "11 AppTextStyles. references found in feedback_result_improved.dart"}
+  ]
+}

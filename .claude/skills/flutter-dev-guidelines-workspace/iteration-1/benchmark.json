@@ -1,0 +1,383 @@
+{
+  "metadata": {
+    "skill_name": "flutter-dev-guidelines",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-03-10T16:20:32Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 1353.2,
+        "tokens": 36758,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Provider is defined using @riverpod annotation (code generation pattern)",
+          "passed": true,
+          "evidence": "1+ occurrences of @riverpod found in outputs"
+        },
+        {
+          "text": "Widget class extends ConsumerWidget (not StatefulWidget or plain StatelessWidget)",
+          "passed": true,
+          "evidence": "ConsumerWidget found in streak_widget.dart"
+        },
+        {
+          "text": "AsyncValue.when() is used to handle all three states: data, loading, and error",
+          "passed": true,
+          "evidence": "2 occurrences of .when( found across files"
+        },
+        {
+          "text": "No setState() calls appear anywhere in the output code",
+          "passed": true,
+          "evidence": "0 occurrences of setState( found"
+        },
+        {
+          "text": "An abstract StreakRepository interface class is defined, separate from the implementation",
+          "passed": true,
+          "evidence": "abstract class Streak found in streak_repository.dart"
+        },
+        {
+          "text": "A concrete StreakRepositoryImpl class implements the abstract interface",
+          "passed": true,
+          "evidence": "implements StreakRepository found"
+        },
+        {
+          "text": "Widget constructors use const keyword",
+          "passed": true,
+          "evidence": "19 occurrences of const constructors found"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 56.8,
+        "tokens": 16275,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "No setState() calls in the refactored HomeScreen \u2014 state is managed by Riverpod",
+          "passed": true,
+          "evidence": "0 setState( found"
+        },
+        {
+          "text": "No Navigator.push() or MaterialPageRoute \u2014 navigation uses context.go() or context.push()",
+          "passed": true,
+          "evidence": "0 Navigator.push in home_screen_refactored.dart; context.go( found 2 times"
+        },
+        {
+          "text": "No direct Dio() instantiation in the widget file \u2014 API calls are in a repository/provider",
+          "passed": true,
+          "evidence": "0 Dio() in home_screen_refactored.dart"
+        },
+        {
+          "text": "No Color(0xFF...) literal in the widget file \u2014 colors reference AppColors.* or Theme.of(context)",
+          "passed": true,
+          "evidence": "0 Color(0x literals in home_screen_refactored.dart \u2014 uses Theme.of(context).colorScheme"
+        },
+        {
+          "text": "No inline TextStyle(fontSize: ...) with hardcoded values in the widget",
+          "passed": true,
+          "evidence": "0 TextStyle(fontSize: found \u2014 uses theme.textTheme"
+        },
+        {
+          "text": "HomeScreen extends ConsumerWidget (not StatefulWidget)",
+          "passed": true,
+          "evidence": "3 ConsumerWidget references found"
+        },
+        {
+          "text": "AsyncValue.when() used to handle loading/data/error states",
+          "passed": true,
+          "evidence": "2 .when( found"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 223.8,
+        "tokens": 37832,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Abstract UserStatsRepository interface class is defined separately from the implementation",
+          "passed": true,
+          "evidence": "abstract class UserStats found in user_stats_repository.dart"
+        },
+        {
+          "text": "Provider uses @riverpod annotation for code generation",
+          "passed": true,
+          "evidence": "2 @riverpod annotations found"
+        },
+        {
+          "text": "Screen widget extends ConsumerWidget",
+          "passed": true,
+          "evidence": "3 ConsumerWidget references found"
+        },
+        {
+          "text": "All three AsyncValue states are handled: data, loading, and error (not just data)",
+          "passed": true,
+          "evidence": "3 keywords found: loading:, error:, data:"
+        },
+        {
+          "text": "Error state renders an error widget or message (not just returns nothing/empty)",
+          "passed": true,
+          "evidence": "4 matches for error widget patterns including onRetry callback"
+        },
+        {
+          "text": "No Color(0xFF...) literals in widget files",
+          "passed": true,
+          "evidence": "0 Color(0x literals found"
+        },
+        {
+          "text": "Screen displays all four stats: display name, total problems solved, streak, and accuracy",
+          "passed": true,
+          "evidence": "8 references to streak/solved/accuracy/problem found"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 1014.5,
+        "tokens": 30224,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Provider is defined using @riverpod annotation (code generation pattern)",
+          "passed": true,
+          "evidence": "2 occurrences of @riverpod found \u2014 agent also used @riverpod without the skill"
+        },
+        {
+          "text": "Widget class extends ConsumerWidget (not StatefulWidget or plain StatelessWidget)",
+          "passed": true,
+          "evidence": "ConsumerWidget found in streak_widget.dart"
+        },
+        {
+          "text": "AsyncValue.when() is used to handle all three states: data, loading, and error",
+          "passed": true,
+          "evidence": "2 occurrences of .when( found"
+        },
+        {
+          "text": "No setState() calls appear anywhere in the output code",
+          "passed": true,
+          "evidence": "0 occurrences of setState( found"
+        },
+        {
+          "text": "An abstract StreakRepository interface class is defined, separate from the implementation",
+          "passed": true,
+          "evidence": "abstract class Streak found"
+        },
+        {
+          "text": "A concrete StreakRepositoryImpl class implements the abstract interface",
+          "passed": true,
+          "evidence": "implements StreakRepository found"
+        },
+        {
+          "text": "Widget constructors use const keyword",
+          "passed": true,
+          "evidence": "23 occurrences of const constructors found"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5714,
+        "passed": 4,
+        "failed": 3,
+        "total": 7,
+        "time_seconds": 36.7,
+        "tokens": 12141,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "No setState() calls in the refactored HomeScreen \u2014 state is managed by Riverpod",
+          "passed": true,
+          "evidence": "0 setState( found \u2014 used ChangeNotifier instead"
+        },
+        {
+          "text": "No Navigator.push() or MaterialPageRoute \u2014 navigation uses context.go() or context.push()",
+          "passed": false,
+          "evidence": "1 Navigator.* found \u2014 agent used Navigator.pushNamed(), not context.go() via GoRouter"
+        },
+        {
+          "text": "No direct Dio() instantiation in the widget file \u2014 API calls are in a repository/provider",
+          "passed": true,
+          "evidence": "0 Dio() in widget file \u2014 extracted to provider"
+        },
+        {
+          "text": "No Color(0xFF...) literal in the widget file \u2014 colors reference AppColors.* or Theme.of(context)",
+          "passed": true,
+          "evidence": "0 Color(0x in home_screen \u2014 used Theme.of(context) colors"
+        },
+        {
+          "text": "No inline TextStyle(fontSize: ...) with hardcoded values in the widget",
+          "passed": true,
+          "evidence": "0 TextStyle(fontSize: found \u2014 used theme.textTheme"
+        },
+        {
+          "text": "HomeScreen extends ConsumerWidget (not StatefulWidget)",
+          "passed": false,
+          "evidence": "Used ChangeNotifier + context.watch (Provider pattern), not ConsumerWidget (Riverpod pattern)"
+        },
+        {
+          "text": "AsyncValue.when() used to handle loading/data/error states",
+          "passed": false,
+          "evidence": "0 .when( found \u2014 used manual boolean flags instead of AsyncValue"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 978.0,
+        "tokens": 28069,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Abstract UserStatsRepository interface class is defined separately from the implementation",
+          "passed": true,
+          "evidence": "abstract keyword found in user_stats_repository.dart ('abstract interface class UserStatsRepository')"
+        },
+        {
+          "text": "Provider uses @riverpod annotation for code generation",
+          "passed": true,
+          "evidence": "2 @riverpod annotations found"
+        },
+        {
+          "text": "Screen widget extends ConsumerWidget",
+          "passed": true,
+          "evidence": "1 ConsumerWidget reference found"
+        },
+        {
+          "text": "All three AsyncValue states are handled: data, loading, and error (not just data)",
+          "passed": true,
+          "evidence": "6 keyword matches for loading:, error:, data:"
+        },
+        {
+          "text": "Error state renders an error widget or message (not just returns nothing/empty)",
+          "passed": true,
+          "evidence": "6 error widget pattern matches found"
+        },
+        {
+          "text": "No Color(0xFF...) literals in widget files",
+          "passed": false,
+          "evidence": "7 Color(0x literals found \u2014 agent defined private _Colors constants with hardcoded hex values instead of importing AppColors"
+        },
+        {
+          "text": "Screen displays all four stats: display name, total problems solved, streak, and accuracy",
+          "passed": true,
+          "evidence": "17 references to stat fields found"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 544.6,
+        "stddev": 705.2288,
+        "min": 56.8,
+        "max": 1353.2
+      },
+      "tokens": {
+        "mean": 30288.3333,
+        "stddev": 12147.7777,
+        "min": 16275,
+        "max": 37832
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.8095,
+        "stddev": 0.2182,
+        "min": 0.5714,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 676.4,
+        "stddev": 554.297,
+        "min": 36.7,
+        "max": 1014.5
+      },
+      "tokens": {
+        "mean": 23478.0,
+        "stddev": 9877.0787,
+        "min": 12141,
+        "max": 30224
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.19",
+      "time_seconds": "-131.8",
+      "tokens": "+6810"
+    }
+  },
+  "notes": []
+}

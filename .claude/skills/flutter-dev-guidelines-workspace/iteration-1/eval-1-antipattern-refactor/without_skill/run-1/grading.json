@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "No setState() calls in the refactored HomeScreen \u2014 state is managed by Riverpod",
+      "passed": true,
+      "evidence": "0 setState( found \u2014 used ChangeNotifier instead"
+    },
+    {
+      "text": "No Navigator.push() or MaterialPageRoute \u2014 navigation uses context.go() or context.push()",
+      "passed": false,
+      "evidence": "1 Navigator.* found \u2014 agent used Navigator.pushNamed(), not context.go() via GoRouter"
+    },
+    {
+      "text": "No direct Dio() instantiation in the widget file \u2014 API calls are in a repository/provider",
+      "passed": true,
+      "evidence": "0 Dio() in widget file \u2014 extracted to provider"
+    },
+    {
+      "text": "No Color(0xFF...) literal in the widget file \u2014 colors reference AppColors.* or Theme.of(context)",
+      "passed": true,
+      "evidence": "0 Color(0x in home_screen \u2014 used Theme.of(context) colors"
+    },
+    {
+      "text": "No inline TextStyle(fontSize: ...) with hardcoded values in the widget",
+      "passed": true,
+      "evidence": "0 TextStyle(fontSize: found \u2014 used theme.textTheme"
+    },
+    {
+      "text": "HomeScreen extends ConsumerWidget (not StatefulWidget)",
+      "passed": false,
+      "evidence": "Used ChangeNotifier + context.watch (Provider pattern), not ConsumerWidget (Riverpod pattern)"
+    },
+    {
+      "text": "AsyncValue.when() used to handle loading/data/error states",
+      "passed": false,
+      "evidence": "0 .when( found \u2014 used manual boolean flags instead of AsyncValue"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 3,
+    "total": 7,
+    "pass_rate": 0.5714
+  }
+}

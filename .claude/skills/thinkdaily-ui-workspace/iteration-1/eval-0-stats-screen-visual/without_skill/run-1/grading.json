@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "References AppTextStyles.* constants (not raw GoogleFonts or inline TextStyle with font families)",
+      "passed": true,
+      "evidence": "12 AppTextStyles. references found \u2014 agent read theme files and used them"
+    },
+    {
+      "text": "References AppColors.* constants (no Color(0xFF...) literals in the widget)",
+      "passed": false,
+      "evidence": "3 raw Color(0x literals found \u2014 _barColor() method defines hardcoded hex for green/amber/red"
+    },
+    {
+      "text": "References AppSpacing.* constants for at least some spacing",
+      "passed": true,
+      "evidence": "23 AppSpacing. references found"
+    },
+    {
+      "text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY()) for entry animations",
+      "passed": false,
+      "evidence": "0 .animate() calls found \u2014 used AnimatedContainer instead"
+    },
+    {
+      "text": "No Card() widgets or BoxDecoration with boxShadow \u2014 design remains flat",
+      "passed": true,
+      "evidence": "0 elevation: or boxShadow found"
+    },
+    {
+      "text": "No Colors.blue, Colors.green, Colors.purple, Colors.teal, or similar colorful accent references",
+      "passed": false,
+      "evidence": "Agent added Color(0xFF2D8653) green, Color(0xFFB07D2B) amber, Color(0xFFB03030) red as semantic progress bar colors \u2014 breaks monochromatic palette"
+    },
+    {
+      "text": "Has visual progress indicators rather than text-only accuracy/category stats",
+      "passed": true,
+      "evidence": "1 visual bar indicator found"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 3,
+    "total": 7,
+    "pass_rate": 0.5714
+  }
+}

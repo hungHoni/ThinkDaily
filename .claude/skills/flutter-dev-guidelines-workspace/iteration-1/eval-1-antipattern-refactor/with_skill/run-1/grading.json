@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "No setState() calls in the refactored HomeScreen \u2014 state is managed by Riverpod",
+      "passed": true,
+      "evidence": "0 setState( found"
+    },
+    {
+      "text": "No Navigator.push() or MaterialPageRoute \u2014 navigation uses context.go() or context.push()",
+      "passed": true,
+      "evidence": "0 Navigator.push in home_screen_refactored.dart; context.go( found 2 times"
+    },
+    {
+      "text": "No direct Dio() instantiation in the widget file \u2014 API calls are in a repository/provider",
+      "passed": true,
+      "evidence": "0 Dio() in home_screen_refactored.dart"
+    },
+    {
+      "text": "No Color(0xFF...) literal in the widget file \u2014 colors reference AppColors.* or Theme.of(context)",
+      "passed": true,
+      "evidence": "0 Color(0x literals in home_screen_refactored.dart \u2014 uses Theme.of(context).colorScheme"
+    },
+    {
+      "text": "No inline TextStyle(fontSize: ...) with hardcoded values in the widget",
+      "passed": true,
+      "evidence": "0 TextStyle(fontSize: found \u2014 uses theme.textTheme"
+    },
+    {
+      "text": "HomeScreen extends ConsumerWidget (not StatefulWidget)",
+      "passed": true,
+      "evidence": "3 ConsumerWidget references found"
+    },
+    {
+      "text": "AsyncValue.when() used to handle loading/data/error states",
+      "passed": true,
+      "evidence": "2 .when( found"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

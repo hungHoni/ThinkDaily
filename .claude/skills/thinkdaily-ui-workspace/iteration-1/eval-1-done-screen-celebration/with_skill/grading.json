@@ -1,0 +1,11 @@
+{
+  "expectations": [
+    {"text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY() or similar) for entry animations", "passed": true, "evidence": "3 .animate()/.fadeIn()/.moveY() references found"},
+    {"text": "Checks MediaQuery.of(context).disableAnimations (respects accessibility reduced motion setting)", "passed": true, "evidence": "2 disableAnimations references found — full noAnim path implemented"},
+    {"text": "Multiple elements use staggered animation delays for sequential reveals", "passed": true, "evidence": "8 delay:.*ms references found — multiple staggered delays"},
+    {"text": "References AppTextStyles.* (no inline TextStyle with raw font sizes)", "passed": true, "evidence": "8 AppTextStyles. references found"},
+    {"text": "References AppColors.* (no Color(0xFF...) literals)", "passed": true, "evidence": "4 AppColors. references, 0 raw Color(0x literals"},
+    {"text": "No colorful accent colors — stays monochromatic", "passed": true, "evidence": "0 colorful Colors.* accent references found"},
+    {"text": "Stats or numbers have some form of animation (counting up, fade in, or slide in)", "passed": true, "evidence": "11 references to TweenAnimationBuilder/_AnimatedCounter/_Animated patterns — count-up animation implemented"}
+  ]
+}

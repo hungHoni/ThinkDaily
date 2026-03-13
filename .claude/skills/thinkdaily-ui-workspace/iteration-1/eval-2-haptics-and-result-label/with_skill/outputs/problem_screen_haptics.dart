@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -122,6 +123,7 @@ class _ProblemView extends ConsumerWidget {
             SubmitButton(
               visible: answerState.hasSelection,
               onPressed: () {
+                HapticFeedback.mediumImpact();
                 ref.read(answerNotifierProvider.notifier).submit(problem);
                 context.push(
                   AppRoutes.feedback,
@@ -155,16 +157,20 @@ class _AnswerSection extends ConsumerWidget {
       return ChoiceOptions(
         options: problem.options,
         selectedIndex: answerState.selectedAnswer as int?,
-        onSelect: (i) =>
-            ref.read(answerNotifierProvider.notifier).selectChoice(i),
+        onSelect: (i) {
+          HapticFeedback.selectionClick();
+          ref.read(answerNotifierProvider.notifier).selectChoice(i);
+        },
         disabled: answerState.submitted,
       );
     }
 
     return OrderingWidget(
       options: problem.options,
-      onOrderChanged: (order) =>
-          ref.read(answerNotifierProvider.notifier).updateOrdering(order),
+      onOrderChanged: (order) {
+        HapticFeedback.selectionClick();
+        ref.read(answerNotifierProvider.notifier).updateOrdering(order);
+      },
       disabled: answerState.submitted,
     );
   }

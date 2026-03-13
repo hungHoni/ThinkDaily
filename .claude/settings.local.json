@@ -19,7 +19,26 @@
       "Bash(mv /Users/huynhhung/Odin/Claude/ThinkDaily/think_daily/.* /Users/huynhhung/Odin/Claude/ThinkDaily/)",
       "Bash(/Users/huynhhung/Odin/Flutter/1/flutter_sdk/bin/flutter pub get)",
       "Bash(gem install securerandom -v 0.3.2 --user-install)",
-      "Bash(gem install cocoapods -v 1.14.3 --user-install)"
+      "Bash(gem install cocoapods -v 1.14.3 --user-install)",
+      "Bash(/Users/huynhhung/Odin/Flutter/1/flutter_sdk/bin/flutter pub run build_runner build --delete-conflicting-outputs)",
+      "Bash(/Users/huynhhung/Odin/Flutter/1/flutter_sdk/bin/flutter analyze)",
+      "Bash(flutter analyze lib/features/problem/data/sources/problem_local_source.dart)",
+      "Bash(flutter analyze)",
+      "Bash(/Users/huynhhung/flutter/bin/flutter analyze)",
+      "Bash(grep -A4 \"id: ''mental-models''\" /Users/huynhhung/Odin/Claude/ThinkDaily/lib/features/problem/data/sources/problem_local_source.dart)",
+      "Bash(/Users/huynhhung/Odin/Flutter/1/flutter_sdk/bin/flutter devices)",
+      "Bash(/Users/huynhhung/Odin/Flutter/1/flutter_sdk/bin/flutter run -d chrome)",
+      "Bash(git add CLAUDE.md lib/app/router.dart lib/core/widgets/word_reveal.dart lib/features/history/data/sources/progress_service.dart lib/features/history/data/sources/streak_service.dart lib/features/history/data/sources/streak_service.g.dart lib/features/history/data/sources/xp_service.dart lib/features/history/data/sources/xp_service.g.dart lib/features/history/presentation/ lib/features/home/ lib/features/problem/data/models/problem.dart lib/features/problem/data/models/problem.freezed.dart lib/features/problem/data/models/problem.g.dart lib/features/problem/data/models/track.dart lib/features/problem/data/models/user_progress.dart lib/features/problem/data/models/user_progress.freezed.dart lib/features/problem/data/models/user_progress.g.dart lib/features/problem/data/sources/problem_local_source.dart lib/features/problem/data/sources/user_progress_service.dart lib/features/problem/data/sources/user_progress_service.g.dart lib/features/problem/presentation/providers/problem_provider.dart lib/features/problem/presentation/providers/problem_provider.g.dart lib/features/problem/presentation/screens/done_screen.dart lib/features/problem/presentation/screens/feedback_screen.dart lib/features/problem/presentation/screens/problem_screen.dart lib/features/problem/presentation/screens/splash_screen.dart dev/active/thinkdaily-phase2/ dev/archive/)",
+      "Bash(git commit:*)",
+      "Bash(git push origin main)",
+      "Bash(/Users/huynhhung/fvm/default/bin/flutter analyze)",
+      "Bash(git add .claude/skills/thinkdaily-ui/ .claude/skills/flutter-dev-guidelines/resources/theming.md .claude/skills/skill-rules.json lib/features/history/presentation/screens/stats_screen.dart lib/features/home/presentation/screens/home_screen.dart lib/features/problem/presentation/screens/done_screen.dart lib/features/problem/presentation/screens/feedback_screen.dart lib/features/problem/presentation/widgets/choice_options.dart devtools_options.yaml)",
+      "Bash(gh run list --limit 3)",
+      "Bash(/Users/huynhhung/fvm/versions/stable/bin/flutter analyze)",
+      "Bash(/Users/huynhhung/Odin/Flutter/1/flutter_sdk/bin/flutter run -d chrome --web-port 8080)",
+      "Bash(git add lib/app/router.dart lib/core/theme/app_text_styles.dart lib/features/history/presentation/providers/stats_provider.dart lib/features/history/presentation/screens/stats_screen.dart lib/features/history/presentation/screens/history_screen.dart lib/features/history/presentation/screens/review_screen.dart lib/features/home/presentation/screens/home_screen.dart lib/features/home/presentation/screens/track_detail_screen.dart lib/features/home/presentation/widgets/ lib/features/home/data/ lib/features/home/presentation/providers/ dev/archive/history-review/)",
+      "Bash(gh run list --limit 5)",
+      "Bash(gh run watch 22866146305 --exit-status)"
     ]
   }
 }

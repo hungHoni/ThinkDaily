@@ -1,0 +1,35 @@
+{
+  "eval_id": 2,
+  "eval_name": "user-profile-screen",
+  "prompt": "Create a UserProfile screen for ThinkDaily that shows: display name, total problems solved, current streak, and accuracy percentage. Wire it up completely — Riverpod provider, UserStatsRepository interface, ConsumerWidget screen. Hardcoded data for now. Error and loading states must be handled.",
+  "assertions": [
+    {
+      "id": "has_abstract_repository",
+      "text": "Abstract UserStatsRepository interface class is defined separately from the implementation"
+    },
+    {
+      "id": "uses_riverpod_annotation",
+      "text": "Provider uses @riverpod annotation for code generation"
+    },
+    {
+      "id": "uses_consumer_widget",
+      "text": "Screen widget extends ConsumerWidget"
+    },
+    {
+      "id": "handles_all_three_states",
+      "text": "All three AsyncValue states are handled: data, loading, and error (not just data)"
+    },
+    {
+      "id": "shows_error_state",
+      "text": "Error state renders an error widget or message (not just returns nothing/empty)"
+    },
+    {
+      "id": "no_hardcoded_colors",
+      "text": "No Color(0xFF...) literals in widget files"
+    },
+    {
+      "id": "shows_all_stats",
+      "text": "Screen displays all four stats: display name, total problems solved, streak, and accuracy"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "eval_id": 0,
+  "eval_name": "stats-screen-visual",
+  "prompt": "Improve the StatsScreen UI — it looks too plain with just text. Keep the minimal editorial style.",
+  "assertions": [
+    {
+      "id": "uses_app_text_styles",
+      "text": "References AppTextStyles.* constants (not raw GoogleFonts.lora() or inline TextStyle with font families)"
+    },
+    {
+      "id": "uses_app_colors",
+      "text": "References AppColors.* constants (no Color(0xFF...) literals in the widget)"
+    },
+    {
+      "id": "uses_app_spacing",
+      "text": "References AppSpacing.* constants for at least some spacing (not all raw SizedBox heights)"
+    },
+    {
+      "id": "uses_flutter_animate",
+      "text": "Uses flutter_animate (.animate() with .fadeIn() or .moveY()) for entry animations"
+    },
+    {
+      "id": "no_card_shadows",
+      "text": "No Card() widgets or BoxDecoration with boxShadow — design remains flat"
+    },
+    {
+      "id": "no_colorful_accents",
+      "text": "No Colors.blue, Colors.green, Colors.purple, Colors.teal, or similar colorful accent references"
+    },
+    {
+      "id": "has_visual_bars",
+      "text": "Has visual progress indicators (LinearProgressIndicator, custom bars, or fraction-based containers) rather than text-only accuracy/category stats"
+    }
+  ]
+}

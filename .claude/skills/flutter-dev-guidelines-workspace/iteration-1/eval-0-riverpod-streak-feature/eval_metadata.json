@@ -1,0 +1,35 @@
+{
+  "eval_id": 0,
+  "eval_name": "riverpod-streak-feature",
+  "prompt": "I need to add a streak tracking feature to my Flutter app called ThinkDaily. Write the full stack: a StreakRepository (abstract interface + implementation), a Riverpod provider that reads from it, and a StreakWidget that displays the current streak count with loading and error states. The app uses flutter_riverpod with code generation (@riverpod annotation), GoRouter for navigation, and freezed for models. The repository implementation should return hardcoded mock data for now (no real backend). Save all output Dart files to the outputs/ directory.",
+  "assertions": [
+    {
+      "id": "uses_riverpod_annotation",
+      "text": "Provider is defined using @riverpod annotation (code generation pattern), not manual Provider() or StateNotifierProvider()"
+    },
+    {
+      "id": "uses_consumer_widget",
+      "text": "Widget class extends ConsumerWidget (not StatefulWidget or plain StatelessWidget)"
+    },
+    {
+      "id": "uses_async_value_when",
+      "text": "AsyncValue.when() is used to handle all three states: data, loading, and error"
+    },
+    {
+      "id": "no_set_state",
+      "text": "No setState() calls appear anywhere in the output code"
+    },
+    {
+      "id": "has_abstract_repository",
+      "text": "An abstract StreakRepository interface class is defined, separate from the implementation"
+    },
+    {
+      "id": "has_repository_impl",
+      "text": "A concrete StreakRepositoryImpl class implements the abstract interface"
+    },
+    {
+      "id": "uses_const_constructors",
+      "text": "Widget constructors use const keyword"
+    }
+  ]
+}

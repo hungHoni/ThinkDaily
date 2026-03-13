@@ -1,0 +1,23 @@
+{
+  "skill_name": "flutter-dev-guidelines",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I need to add a streak tracking feature to my Flutter app called ThinkDaily. Write the full stack: a StreakRepository (abstract interface + implementation), a Riverpod provider that reads from it, and a StreakWidget that displays the current streak count with loading and error states. The app uses flutter_riverpod with code generation (@riverpod annotation), GoRouter for navigation, and freezed for models. Save all output Dart files to the outputs/ directory.",
+      "expected_output": "Clean architecture code: abstract StreakRepository interface, implementation class, @riverpod annotated provider using AsyncValue, ConsumerWidget using .when() for all three states, no setState, no Navigator.push, no hardcoded colors.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "Refactor this Flutter code — it has several anti-patterns that need fixing:\n\n```dart\nclass HomeScreen extends StatefulWidget {\n  @override\n  _HomeScreenState createState() => _HomeScreenState();\n}\n\nclass _HomeScreenState extends State<HomeScreen> {\n  String? userName;\n  bool isLoading = false;\n\n  @override\n  void initState() {\n    super.initState();\n    _loadUser();\n  }\n\n  Future<void> _loadUser() async {\n    setState(() => isLoading = true);\n    final response = await Dio().get('https://api.example.com/user');\n    setState(() {\n      userName = response.data['name'];\n      isLoading = false;\n    });\n  }\n\n  @override\n  Widget build(BuildContext context) {\n    return Scaffold(\n      body: isLoading\n        ? CircularProgressIndicator()\n        : GestureDetector(\n            onTap: () => Navigator.push(\n              context,\n              MaterialPageRoute(builder: (_) => ProfileScreen()),\n            ),\n            child: Text(\n              userName ?? 'Guest',\n              style: TextStyle(color: Color(0xFF111111), fontSize: 20),\n            ),\n          ),\n    );\n  }\n}\n```\n\nRewrite it the right way. Save your output to outputs/home_screen_refactored.dart and outputs/user_provider.dart",
+      "expected_output": "Refactored code with: ConsumerWidget, @riverpod provider, repository pattern (no direct Dio in widget), AsyncValue.when() for all states, context.go() instead of Navigator.push, AppColors/AppTextStyles instead of hardcoded values.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Create a UserProfile screen for ThinkDaily that shows: display name, total problems solved, current streak, and accuracy percentage. Wire it up completely — Riverpod provider using @riverpod annotation, a UserStatsRepository interface, and the screen widget using ConsumerWidget. Assume no real backend yet — use hardcoded data in the repository impl for now. Error and loading states must be handled. Save all files to outputs/.",
+      "expected_output": "Full feature: abstract UserStatsRepository, UserStatsRepositoryImpl with mock data, @riverpod provider with AsyncValue, ConsumerWidget using .when() with error/loading/data states, const constructors, no hardcoded colors or text styles.",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "expectations": [
+    {"text": "No setState() calls in the refactored HomeScreen — state is managed by Riverpod", "passed": true, "evidence": "0 setState( found — used ChangeNotifier instead"},
+    {"text": "No Navigator.push() or MaterialPageRoute — navigation uses context.go() or context.push()", "passed": false, "evidence": "1 Navigator.* found — agent used Navigator.pushNamed(), not context.go() via GoRouter"},
+    {"text": "No direct Dio() instantiation in the widget file — API calls are in a repository/provider", "passed": true, "evidence": "0 Dio() in widget file — extracted to provider"},
+    {"text": "No Color(0xFF...) literal in the widget file — colors reference AppColors.* or Theme.of(context)", "passed": true, "evidence": "0 Color(0x in home_screen — used Theme.of(context) colors"},
+    {"text": "No inline TextStyle(fontSize: ...) with hardcoded values in the widget", "passed": true, "evidence": "0 TextStyle(fontSize: found — used theme.textTheme"},
+    {"text": "HomeScreen extends ConsumerWidget (not StatefulWidget)", "passed": false, "evidence": "Used ChangeNotifier + context.watch (Provider pattern), not ConsumerWidget (Riverpod pattern)"},
+    {"text": "AsyncValue.when() used to handle loading/data/error states", "passed": false, "evidence": "0 .when( found — used manual boolean flags instead of AsyncValue"}
+  ]
+}
