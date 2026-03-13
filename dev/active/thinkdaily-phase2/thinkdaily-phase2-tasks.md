@@ -50,15 +50,21 @@
 
 ---
 
-## Phase 2d: More Content
+## Phase 2d: Complete Curriculum (Tracks 1–8) ✓ COMPLETE
 
+- [x] Track 1: Problem Decomposition — 4 units × 3 questions
 - [x] Track 2: Systems Thinking — 4 units × 3 questions
 - [x] Track 3: Mental Models — 5 units × 3 questions
-- [ ] Track 4: Decision Making — 4 units × 3 questions
-- [ ] Track 5: Estimation & Scale — 4 units × 3 questions
-- [ ] Track 6: Critical Evaluation — 4 units × 3 questions
-- [ ] Track 7: System Design Thinking — 4 units × 3 questions
-- [ ] Track 8: Communication Thinking — 3 units × 3 questions
+- [x] Track 4: Decision Making — 4 units × 3 questions
+- [x] Track 5: Estimation & Scale — 4 units × 3 questions
+- [x] Track 6: Critical Evaluation — 4 units × 3 questions
+- [x] Track 7: System Design Thinking — 4 units × 3 questions
+- [x] Track 8: Communication Thinking — 3 units × 3 questions
+- [x] All questions written in curriculum.md
+- [x] All questions coded into problem_local_source.dart
+- [x] build_runner → all generated files up to date
+- [x] flutter analyze → No issues found
+- [x] code-architecture-reviewer → No HIGH/MEDIUM issues
 
 ---
 

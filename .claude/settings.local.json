@@ -38,7 +38,9 @@
       "Bash(/Users/huynhhung/Odin/Flutter/1/flutter_sdk/bin/flutter run -d chrome --web-port 8080)",
       "Bash(git add lib/app/router.dart lib/core/theme/app_text_styles.dart lib/features/history/presentation/providers/stats_provider.dart lib/features/history/presentation/screens/stats_screen.dart lib/features/history/presentation/screens/history_screen.dart lib/features/history/presentation/screens/review_screen.dart lib/features/home/presentation/screens/home_screen.dart lib/features/home/presentation/screens/track_detail_screen.dart lib/features/home/presentation/widgets/ lib/features/home/data/ lib/features/home/presentation/providers/ dev/archive/history-review/)",
       "Bash(gh run list --limit 5)",
-      "Bash(gh run watch 22866146305 --exit-status)"
+      "Bash(gh run watch 22866146305 --exit-status)",
+      "Bash(grep -n \"trackId: ''decision-making''\" /Users/huynhhung/Odin/Claude/ThinkDaily/lib/features/problem/data/sources/problem_local_source.dart)",
+      "Bash(grep -n \"trackId: ''communication''\" /Users/huynhhung/Odin/Claude/ThinkDaily/lib/features/problem/data/sources/problem_local_source.dart)"
     ]
   }
 }

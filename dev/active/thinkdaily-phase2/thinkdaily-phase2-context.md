@@ -6,8 +6,6 @@ Last Updated: 2026-03-10
 ### COMPLETED
 - Phase 1: All 8 phases — core app fully working (one question per day, date-based)
 - Phase 2 planning: full curriculum designed (8 tracks, AI-era thinking skills)
-- Track 1 content: all 4 units × 3 questions written in curriculum.md
-- Tracks 2–8: unit structure + question outlines written in curriculum.md
 - **Phase 2a: Curriculum data model — DONE** (`flutter analyze` → No issues found)
   - Problem model revised: dropped `date`/`category`, added `trackId`/`unitIndex`/`questionIndex`/`difficulty`/`unitTitle`
   - New: `Track`, `Unit` models (track.dart)
@@ -35,16 +33,22 @@ Last Updated: 2026-03-10
   - Updated: `FeedbackScreen` — animated "+10 XP" / "+5 XP" label fades in after thinking pattern
   - Fixed: dead ternary `userAnswer is List ? userAnswer : userAnswer` in `progress_service.dart`
 
-### IN PROGRESS
-- Phase 2d: Tracks 4–8 still need questions written + coded
+- **Phase 2d: Complete Curriculum (Tracks 4–8) — DONE** (`flutter analyze` → No issues found; architecture review passed)
+  - Wrote 56 new problems (96 total with tracks 1-3)
+  - Track 4: Decision Making (4 units × 3 questions)
+  - Track 5: Estimation & Scale (4 units × 3 questions)
+  - Track 6: Critical Evaluation (4 units × 3 questions)
+  - Track 7: System Design Thinking (4 units × 3 questions)
+  - Track 8: Communication Thinking (3 units × 3 questions)
+  - All questions written in curriculum.md + coded into problem_local_source.dart
+  - Added Track/Unit entries for tracks 4-8
+  - Full data model consistency verified across all 96 problems
 
 ### BLOCKERS
 - None
 
 ### Next Session — Resume Here
-- Start Track 4: Decision Making (4 units × 3 questions)
-- Write questions in curriculum.md first, then code into problem_local_source.dart
-- Follow tasks.md Phase 2d checklist
+- Phase 3 planning: next features (track selection UI, practice mode, achievements, onboarding)
 
 ## Quick Resume
 1. Read this file
